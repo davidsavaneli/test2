@@ -2,7 +2,6 @@ import { Outlet, createRootRoute } from '@tanstack/react-router'
 import { Suspense, lazy } from 'react'
 import { Icon, ThemeToggle, Typography } from 'sava-test'
 import { Sidebar } from '../components/Sidebar'
-import { useNavTree } from '../nav'
 
 // Devtools are dev-only and code-split out of the production bundle.
 const RouterDevtools = import.meta.env.PROD
@@ -18,7 +17,6 @@ export const Route = createRootRoute({
 })
 
 function RootLayout() {
-  const navTree = useNavTree()
   return (
     <div className="admin-shell">
       <aside className="admin-sidebar">
@@ -26,7 +24,7 @@ function RootLayout() {
           <Icon name="Box" color="primary" size="lg" />
           <Typography variant="h4">Techzy Admin</Typography>
         </div>
-        <Sidebar tree={navTree} />
+        <Sidebar />
       </aside>
 
       <div className="admin-main">

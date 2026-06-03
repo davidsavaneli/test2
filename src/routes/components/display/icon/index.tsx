@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Icon } from 'sava-test'
-import { Page } from '../../../components/Page'
+import { Page } from '../../../../components/Page'
 
-export const Route = createFileRoute('/components/display/icon')({
+export const Route = createFileRoute('/components/display/icon/')({
   staticData: { name: 'Icon', order: 1 },
   component: IconPage,
 })

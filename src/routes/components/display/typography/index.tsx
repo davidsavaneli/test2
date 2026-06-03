@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Typography } from 'sava-test'
-import { Page } from '../../../components/Page'
+import { Page } from '../../../../components/Page'
 
-export const Route = createFileRoute('/components/display/typography')({
+export const Route = createFileRoute('/components/display/typography/')({
   staticData: { name: 'Typography', order: 0 },
   component: TypographyPage,
 })

@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { NumberField } from 'sava-test'
-import { Page } from '../../../components/Page'
+import { Page } from '../../../../components/Page'
 
-export const Route = createFileRoute('/components/forms/number-field')({
+export const Route = createFileRoute('/components/forms/number-field/')({
   staticData: { name: 'Number Field', order: 3 },
   component: NumberFieldPage,
 })

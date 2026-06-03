@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Typography } from 'sava-test'
-import { Page } from '../../components/Page'
-import { useMediaQuery } from '../../hooks/useMediaQuery'
+import { Page } from '../../../components/Page'
+import { useMediaQuery } from '../../../hooks/useMediaQuery'
 
-export const Route = createFileRoute('/hooks/use-media-query')({
+export const Route = createFileRoute('/hooks/use-media-query/')({
   staticData: { name: 'useMediaQuery' },
   component: UseMediaQueryPage,
 })

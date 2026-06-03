@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Checkbox } from 'sava-test'
-import { Page } from '../../../components/Page'
+import { Page } from '../../../../components/Page'
 
-export const Route = createFileRoute('/components/forms/checkbox')({
+export const Route = createFileRoute('/components/forms/checkbox/')({
   staticData: { name: 'Checkbox', order: 4 },
   component: CheckboxPage,
 })

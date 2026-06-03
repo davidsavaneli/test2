@@ -10,32 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as HooksUseMediaQueryRouteImport } from './routes/hooks/use-media-query'
-import { Route as ComponentsThemeToggleRouteImport } from './routes/components/theme-toggle'
 import { Route as ComponentsFormsRouteRouteImport } from './routes/components/forms/route'
 import { Route as ComponentsDisplayRouteRouteImport } from './routes/components/display/route'
-import { Route as ComponentsFormsTextFieldRouteImport } from './routes/components/forms/text-field'
-import { Route as ComponentsFormsNumberFieldRouteImport } from './routes/components/forms/number-field'
-import { Route as ComponentsFormsIconButtonRouteImport } from './routes/components/forms/icon-button'
-import { Route as ComponentsFormsCheckboxRouteImport } from './routes/components/forms/checkbox'
-import { Route as ComponentsFormsButtonRouteImport } from './routes/components/forms/button'
-import { Route as ComponentsDisplayTypographyRouteImport } from './routes/components/display/typography'
-import { Route as ComponentsDisplayIconRouteImport } from './routes/components/display/icon'
+import { Route as HooksUseMediaQueryIndexRouteImport } from './routes/hooks/use-media-query/index'
+import { Route as ComponentsThemeToggleIndexRouteImport } from './routes/components/theme-toggle/index'
+import { Route as ComponentsFormsTextFieldIndexRouteImport } from './routes/components/forms/text-field/index'
+import { Route as ComponentsFormsNumberFieldIndexRouteImport } from './routes/components/forms/number-field/index'
+import { Route as ComponentsFormsIconButtonIndexRouteImport } from './routes/components/forms/icon-button/index'
+import { Route as ComponentsFormsCheckboxIndexRouteImport } from './routes/components/forms/checkbox/index'
+import { Route as ComponentsFormsButtonIndexRouteImport } from './routes/components/forms/button/index'
+import { Route as ComponentsDisplayTypographyIndexRouteImport } from './routes/components/display/typography/index'
 import { Route as ComponentsDisplayLoaderIndexRouteImport } from './routes/components/display/loader/index'
+import { Route as ComponentsDisplayIconIndexRouteImport } from './routes/components/display/icon/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HooksUseMediaQueryRoute = HooksUseMediaQueryRouteImport.update({
-  id: '/hooks/use-media-query',
-  path: '/hooks/use-media-query',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ComponentsThemeToggleRoute = ComponentsThemeToggleRouteImport.update({
-  id: '/components/theme-toggle',
-  path: '/components/theme-toggle',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComponentsFormsRouteRoute = ComponentsFormsRouteRouteImport.update({
@@ -48,49 +38,63 @@ const ComponentsDisplayRouteRoute = ComponentsDisplayRouteRouteImport.update({
   path: '/components/display',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ComponentsFormsTextFieldRoute =
-  ComponentsFormsTextFieldRouteImport.update({
-    id: '/text-field',
-    path: '/text-field',
-    getParentRoute: () => ComponentsFormsRouteRoute,
-  } as any)
-const ComponentsFormsNumberFieldRoute =
-  ComponentsFormsNumberFieldRouteImport.update({
-    id: '/number-field',
-    path: '/number-field',
-    getParentRoute: () => ComponentsFormsRouteRoute,
-  } as any)
-const ComponentsFormsIconButtonRoute =
-  ComponentsFormsIconButtonRouteImport.update({
-    id: '/icon-button',
-    path: '/icon-button',
-    getParentRoute: () => ComponentsFormsRouteRoute,
-  } as any)
-const ComponentsFormsCheckboxRoute = ComponentsFormsCheckboxRouteImport.update({
-  id: '/checkbox',
-  path: '/checkbox',
-  getParentRoute: () => ComponentsFormsRouteRoute,
+const HooksUseMediaQueryIndexRoute = HooksUseMediaQueryIndexRouteImport.update({
+  id: '/hooks/use-media-query/',
+  path: '/hooks/use-media-query/',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const ComponentsFormsButtonRoute = ComponentsFormsButtonRouteImport.update({
-  id: '/button',
-  path: '/button',
-  getParentRoute: () => ComponentsFormsRouteRoute,
-} as any)
-const ComponentsDisplayTypographyRoute =
-  ComponentsDisplayTypographyRouteImport.update({
-    id: '/typography',
-    path: '/typography',
+const ComponentsThemeToggleIndexRoute =
+  ComponentsThemeToggleIndexRouteImport.update({
+    id: '/components/theme-toggle/',
+    path: '/components/theme-toggle/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ComponentsFormsTextFieldIndexRoute =
+  ComponentsFormsTextFieldIndexRouteImport.update({
+    id: '/text-field/',
+    path: '/text-field/',
+    getParentRoute: () => ComponentsFormsRouteRoute,
+  } as any)
+const ComponentsFormsNumberFieldIndexRoute =
+  ComponentsFormsNumberFieldIndexRouteImport.update({
+    id: '/number-field/',
+    path: '/number-field/',
+    getParentRoute: () => ComponentsFormsRouteRoute,
+  } as any)
+const ComponentsFormsIconButtonIndexRoute =
+  ComponentsFormsIconButtonIndexRouteImport.update({
+    id: '/icon-button/',
+    path: '/icon-button/',
+    getParentRoute: () => ComponentsFormsRouteRoute,
+  } as any)
+const ComponentsFormsCheckboxIndexRoute =
+  ComponentsFormsCheckboxIndexRouteImport.update({
+    id: '/checkbox/',
+    path: '/checkbox/',
+    getParentRoute: () => ComponentsFormsRouteRoute,
+  } as any)
+const ComponentsFormsButtonIndexRoute =
+  ComponentsFormsButtonIndexRouteImport.update({
+    id: '/button/',
+    path: '/button/',
+    getParentRoute: () => ComponentsFormsRouteRoute,
+  } as any)
+const ComponentsDisplayTypographyIndexRoute =
+  ComponentsDisplayTypographyIndexRouteImport.update({
+    id: '/typography/',
+    path: '/typography/',
     getParentRoute: () => ComponentsDisplayRouteRoute,
   } as any)
-const ComponentsDisplayIconRoute = ComponentsDisplayIconRouteImport.update({
-  id: '/icon',
-  path: '/icon',
-  getParentRoute: () => ComponentsDisplayRouteRoute,
-} as any)
 const ComponentsDisplayLoaderIndexRoute =
   ComponentsDisplayLoaderIndexRouteImport.update({
     id: '/loader/',
     path: '/loader/',
+    getParentRoute: () => ComponentsDisplayRouteRoute,
+  } as any)
+const ComponentsDisplayIconIndexRoute =
+  ComponentsDisplayIconIndexRouteImport.update({
+    id: '/icon/',
+    path: '/icon/',
     getParentRoute: () => ComponentsDisplayRouteRoute,
   } as any)
 
@@ -98,47 +102,47 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/components/display': typeof ComponentsDisplayRouteRouteWithChildren
   '/components/forms': typeof ComponentsFormsRouteRouteWithChildren
-  '/components/theme-toggle': typeof ComponentsThemeToggleRoute
-  '/hooks/use-media-query': typeof HooksUseMediaQueryRoute
-  '/components/display/icon': typeof ComponentsDisplayIconRoute
-  '/components/display/typography': typeof ComponentsDisplayTypographyRoute
-  '/components/forms/button': typeof ComponentsFormsButtonRoute
-  '/components/forms/checkbox': typeof ComponentsFormsCheckboxRoute
-  '/components/forms/icon-button': typeof ComponentsFormsIconButtonRoute
-  '/components/forms/number-field': typeof ComponentsFormsNumberFieldRoute
-  '/components/forms/text-field': typeof ComponentsFormsTextFieldRoute
+  '/components/theme-toggle/': typeof ComponentsThemeToggleIndexRoute
+  '/hooks/use-media-query/': typeof HooksUseMediaQueryIndexRoute
+  '/components/display/icon/': typeof ComponentsDisplayIconIndexRoute
   '/components/display/loader/': typeof ComponentsDisplayLoaderIndexRoute
+  '/components/display/typography/': typeof ComponentsDisplayTypographyIndexRoute
+  '/components/forms/button/': typeof ComponentsFormsButtonIndexRoute
+  '/components/forms/checkbox/': typeof ComponentsFormsCheckboxIndexRoute
+  '/components/forms/icon-button/': typeof ComponentsFormsIconButtonIndexRoute
+  '/components/forms/number-field/': typeof ComponentsFormsNumberFieldIndexRoute
+  '/components/forms/text-field/': typeof ComponentsFormsTextFieldIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/components/display': typeof ComponentsDisplayRouteRouteWithChildren
   '/components/forms': typeof ComponentsFormsRouteRouteWithChildren
-  '/components/theme-toggle': typeof ComponentsThemeToggleRoute
-  '/hooks/use-media-query': typeof HooksUseMediaQueryRoute
-  '/components/display/icon': typeof ComponentsDisplayIconRoute
-  '/components/display/typography': typeof ComponentsDisplayTypographyRoute
-  '/components/forms/button': typeof ComponentsFormsButtonRoute
-  '/components/forms/checkbox': typeof ComponentsFormsCheckboxRoute
-  '/components/forms/icon-button': typeof ComponentsFormsIconButtonRoute
-  '/components/forms/number-field': typeof ComponentsFormsNumberFieldRoute
-  '/components/forms/text-field': typeof ComponentsFormsTextFieldRoute
+  '/components/theme-toggle': typeof ComponentsThemeToggleIndexRoute
+  '/hooks/use-media-query': typeof HooksUseMediaQueryIndexRoute
+  '/components/display/icon': typeof ComponentsDisplayIconIndexRoute
   '/components/display/loader': typeof ComponentsDisplayLoaderIndexRoute
+  '/components/display/typography': typeof ComponentsDisplayTypographyIndexRoute
+  '/components/forms/button': typeof ComponentsFormsButtonIndexRoute
+  '/components/forms/checkbox': typeof ComponentsFormsCheckboxIndexRoute
+  '/components/forms/icon-button': typeof ComponentsFormsIconButtonIndexRoute
+  '/components/forms/number-field': typeof ComponentsFormsNumberFieldIndexRoute
+  '/components/forms/text-field': typeof ComponentsFormsTextFieldIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/components/display': typeof ComponentsDisplayRouteRouteWithChildren
   '/components/forms': typeof ComponentsFormsRouteRouteWithChildren
-  '/components/theme-toggle': typeof ComponentsThemeToggleRoute
-  '/hooks/use-media-query': typeof HooksUseMediaQueryRoute
-  '/components/display/icon': typeof ComponentsDisplayIconRoute
-  '/components/display/typography': typeof ComponentsDisplayTypographyRoute
-  '/components/forms/button': typeof ComponentsFormsButtonRoute
-  '/components/forms/checkbox': typeof ComponentsFormsCheckboxRoute
-  '/components/forms/icon-button': typeof ComponentsFormsIconButtonRoute
-  '/components/forms/number-field': typeof ComponentsFormsNumberFieldRoute
-  '/components/forms/text-field': typeof ComponentsFormsTextFieldRoute
+  '/components/theme-toggle/': typeof ComponentsThemeToggleIndexRoute
+  '/hooks/use-media-query/': typeof HooksUseMediaQueryIndexRoute
+  '/components/display/icon/': typeof ComponentsDisplayIconIndexRoute
   '/components/display/loader/': typeof ComponentsDisplayLoaderIndexRoute
+  '/components/display/typography/': typeof ComponentsDisplayTypographyIndexRoute
+  '/components/forms/button/': typeof ComponentsFormsButtonIndexRoute
+  '/components/forms/checkbox/': typeof ComponentsFormsCheckboxIndexRoute
+  '/components/forms/icon-button/': typeof ComponentsFormsIconButtonIndexRoute
+  '/components/forms/number-field/': typeof ComponentsFormsNumberFieldIndexRoute
+  '/components/forms/text-field/': typeof ComponentsFormsTextFieldIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -146,16 +150,16 @@ export interface FileRouteTypes {
     | '/'
     | '/components/display'
     | '/components/forms'
-    | '/components/theme-toggle'
-    | '/hooks/use-media-query'
-    | '/components/display/icon'
-    | '/components/display/typography'
-    | '/components/forms/button'
-    | '/components/forms/checkbox'
-    | '/components/forms/icon-button'
-    | '/components/forms/number-field'
-    | '/components/forms/text-field'
+    | '/components/theme-toggle/'
+    | '/hooks/use-media-query/'
+    | '/components/display/icon/'
     | '/components/display/loader/'
+    | '/components/display/typography/'
+    | '/components/forms/button/'
+    | '/components/forms/checkbox/'
+    | '/components/forms/icon-button/'
+    | '/components/forms/number-field/'
+    | '/components/forms/text-field/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -164,36 +168,36 @@ export interface FileRouteTypes {
     | '/components/theme-toggle'
     | '/hooks/use-media-query'
     | '/components/display/icon'
+    | '/components/display/loader'
     | '/components/display/typography'
     | '/components/forms/button'
     | '/components/forms/checkbox'
     | '/components/forms/icon-button'
     | '/components/forms/number-field'
     | '/components/forms/text-field'
-    | '/components/display/loader'
   id:
     | '__root__'
     | '/'
     | '/components/display'
     | '/components/forms'
-    | '/components/theme-toggle'
-    | '/hooks/use-media-query'
-    | '/components/display/icon'
-    | '/components/display/typography'
-    | '/components/forms/button'
-    | '/components/forms/checkbox'
-    | '/components/forms/icon-button'
-    | '/components/forms/number-field'
-    | '/components/forms/text-field'
+    | '/components/theme-toggle/'
+    | '/hooks/use-media-query/'
+    | '/components/display/icon/'
     | '/components/display/loader/'
+    | '/components/display/typography/'
+    | '/components/forms/button/'
+    | '/components/forms/checkbox/'
+    | '/components/forms/icon-button/'
+    | '/components/forms/number-field/'
+    | '/components/forms/text-field/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ComponentsDisplayRouteRoute: typeof ComponentsDisplayRouteRouteWithChildren
   ComponentsFormsRouteRoute: typeof ComponentsFormsRouteRouteWithChildren
-  ComponentsThemeToggleRoute: typeof ComponentsThemeToggleRoute
-  HooksUseMediaQueryRoute: typeof HooksUseMediaQueryRoute
+  ComponentsThemeToggleIndexRoute: typeof ComponentsThemeToggleIndexRoute
+  HooksUseMediaQueryIndexRoute: typeof HooksUseMediaQueryIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -203,20 +207,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/hooks/use-media-query': {
-      id: '/hooks/use-media-query'
-      path: '/hooks/use-media-query'
-      fullPath: '/hooks/use-media-query'
-      preLoaderRoute: typeof HooksUseMediaQueryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/components/theme-toggle': {
-      id: '/components/theme-toggle'
-      path: '/components/theme-toggle'
-      fullPath: '/components/theme-toggle'
-      preLoaderRoute: typeof ComponentsThemeToggleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components/forms': {
@@ -233,53 +223,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsDisplayRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/components/forms/text-field': {
-      id: '/components/forms/text-field'
+    '/hooks/use-media-query/': {
+      id: '/hooks/use-media-query/'
+      path: '/hooks/use-media-query'
+      fullPath: '/hooks/use-media-query/'
+      preLoaderRoute: typeof HooksUseMediaQueryIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/theme-toggle/': {
+      id: '/components/theme-toggle/'
+      path: '/components/theme-toggle'
+      fullPath: '/components/theme-toggle/'
+      preLoaderRoute: typeof ComponentsThemeToggleIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/forms/text-field/': {
+      id: '/components/forms/text-field/'
       path: '/text-field'
-      fullPath: '/components/forms/text-field'
-      preLoaderRoute: typeof ComponentsFormsTextFieldRouteImport
+      fullPath: '/components/forms/text-field/'
+      preLoaderRoute: typeof ComponentsFormsTextFieldIndexRouteImport
       parentRoute: typeof ComponentsFormsRouteRoute
     }
-    '/components/forms/number-field': {
-      id: '/components/forms/number-field'
+    '/components/forms/number-field/': {
+      id: '/components/forms/number-field/'
       path: '/number-field'
-      fullPath: '/components/forms/number-field'
-      preLoaderRoute: typeof ComponentsFormsNumberFieldRouteImport
+      fullPath: '/components/forms/number-field/'
+      preLoaderRoute: typeof ComponentsFormsNumberFieldIndexRouteImport
       parentRoute: typeof ComponentsFormsRouteRoute
     }
-    '/components/forms/icon-button': {
-      id: '/components/forms/icon-button'
+    '/components/forms/icon-button/': {
+      id: '/components/forms/icon-button/'
       path: '/icon-button'
-      fullPath: '/components/forms/icon-button'
-      preLoaderRoute: typeof ComponentsFormsIconButtonRouteImport
+      fullPath: '/components/forms/icon-button/'
+      preLoaderRoute: typeof ComponentsFormsIconButtonIndexRouteImport
       parentRoute: typeof ComponentsFormsRouteRoute
     }
-    '/components/forms/checkbox': {
-      id: '/components/forms/checkbox'
+    '/components/forms/checkbox/': {
+      id: '/components/forms/checkbox/'
       path: '/checkbox'
-      fullPath: '/components/forms/checkbox'
-      preLoaderRoute: typeof ComponentsFormsCheckboxRouteImport
+      fullPath: '/components/forms/checkbox/'
+      preLoaderRoute: typeof ComponentsFormsCheckboxIndexRouteImport
       parentRoute: typeof ComponentsFormsRouteRoute
     }
-    '/components/forms/button': {
-      id: '/components/forms/button'
+    '/components/forms/button/': {
+      id: '/components/forms/button/'
       path: '/button'
-      fullPath: '/components/forms/button'
-      preLoaderRoute: typeof ComponentsFormsButtonRouteImport
+      fullPath: '/components/forms/button/'
+      preLoaderRoute: typeof ComponentsFormsButtonIndexRouteImport
       parentRoute: typeof ComponentsFormsRouteRoute
     }
-    '/components/display/typography': {
-      id: '/components/display/typography'
+    '/components/display/typography/': {
+      id: '/components/display/typography/'
       path: '/typography'
-      fullPath: '/components/display/typography'
-      preLoaderRoute: typeof ComponentsDisplayTypographyRouteImport
-      parentRoute: typeof ComponentsDisplayRouteRoute
-    }
-    '/components/display/icon': {
-      id: '/components/display/icon'
-      path: '/icon'
-      fullPath: '/components/display/icon'
-      preLoaderRoute: typeof ComponentsDisplayIconRouteImport
+      fullPath: '/components/display/typography/'
+      preLoaderRoute: typeof ComponentsDisplayTypographyIndexRouteImport
       parentRoute: typeof ComponentsDisplayRouteRoute
     }
     '/components/display/loader/': {
@@ -289,20 +286,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsDisplayLoaderIndexRouteImport
       parentRoute: typeof ComponentsDisplayRouteRoute
     }
+    '/components/display/icon/': {
+      id: '/components/display/icon/'
+      path: '/icon'
+      fullPath: '/components/display/icon/'
+      preLoaderRoute: typeof ComponentsDisplayIconIndexRouteImport
+      parentRoute: typeof ComponentsDisplayRouteRoute
+    }
   }
 }
 
 interface ComponentsDisplayRouteRouteChildren {
-  ComponentsDisplayIconRoute: typeof ComponentsDisplayIconRoute
-  ComponentsDisplayTypographyRoute: typeof ComponentsDisplayTypographyRoute
+  ComponentsDisplayIconIndexRoute: typeof ComponentsDisplayIconIndexRoute
   ComponentsDisplayLoaderIndexRoute: typeof ComponentsDisplayLoaderIndexRoute
+  ComponentsDisplayTypographyIndexRoute: typeof ComponentsDisplayTypographyIndexRoute
 }
 
 const ComponentsDisplayRouteRouteChildren: ComponentsDisplayRouteRouteChildren =
   {
-    ComponentsDisplayIconRoute: ComponentsDisplayIconRoute,
-    ComponentsDisplayTypographyRoute: ComponentsDisplayTypographyRoute,
+    ComponentsDisplayIconIndexRoute: ComponentsDisplayIconIndexRoute,
     ComponentsDisplayLoaderIndexRoute: ComponentsDisplayLoaderIndexRoute,
+    ComponentsDisplayTypographyIndexRoute:
+      ComponentsDisplayTypographyIndexRoute,
   }
 
 const ComponentsDisplayRouteRouteWithChildren =
@@ -311,19 +316,19 @@ const ComponentsDisplayRouteRouteWithChildren =
   )
 
 interface ComponentsFormsRouteRouteChildren {
-  ComponentsFormsButtonRoute: typeof ComponentsFormsButtonRoute
-  ComponentsFormsCheckboxRoute: typeof ComponentsFormsCheckboxRoute
-  ComponentsFormsIconButtonRoute: typeof ComponentsFormsIconButtonRoute
-  ComponentsFormsNumberFieldRoute: typeof ComponentsFormsNumberFieldRoute
-  ComponentsFormsTextFieldRoute: typeof ComponentsFormsTextFieldRoute
+  ComponentsFormsButtonIndexRoute: typeof ComponentsFormsButtonIndexRoute
+  ComponentsFormsCheckboxIndexRoute: typeof ComponentsFormsCheckboxIndexRoute
+  ComponentsFormsIconButtonIndexRoute: typeof ComponentsFormsIconButtonIndexRoute
+  ComponentsFormsNumberFieldIndexRoute: typeof ComponentsFormsNumberFieldIndexRoute
+  ComponentsFormsTextFieldIndexRoute: typeof ComponentsFormsTextFieldIndexRoute
 }
 
 const ComponentsFormsRouteRouteChildren: ComponentsFormsRouteRouteChildren = {
-  ComponentsFormsButtonRoute: ComponentsFormsButtonRoute,
-  ComponentsFormsCheckboxRoute: ComponentsFormsCheckboxRoute,
-  ComponentsFormsIconButtonRoute: ComponentsFormsIconButtonRoute,
-  ComponentsFormsNumberFieldRoute: ComponentsFormsNumberFieldRoute,
-  ComponentsFormsTextFieldRoute: ComponentsFormsTextFieldRoute,
+  ComponentsFormsButtonIndexRoute: ComponentsFormsButtonIndexRoute,
+  ComponentsFormsCheckboxIndexRoute: ComponentsFormsCheckboxIndexRoute,
+  ComponentsFormsIconButtonIndexRoute: ComponentsFormsIconButtonIndexRoute,
+  ComponentsFormsNumberFieldIndexRoute: ComponentsFormsNumberFieldIndexRoute,
+  ComponentsFormsTextFieldIndexRoute: ComponentsFormsTextFieldIndexRoute,
 }
 
 const ComponentsFormsRouteRouteWithChildren =
@@ -333,8 +338,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ComponentsDisplayRouteRoute: ComponentsDisplayRouteRouteWithChildren,
   ComponentsFormsRouteRoute: ComponentsFormsRouteRouteWithChildren,
-  ComponentsThemeToggleRoute: ComponentsThemeToggleRoute,
-  HooksUseMediaQueryRoute: HooksUseMediaQueryRoute,
+  ComponentsThemeToggleIndexRoute: ComponentsThemeToggleIndexRoute,
+  HooksUseMediaQueryIndexRoute: HooksUseMediaQueryIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

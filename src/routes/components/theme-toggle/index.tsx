@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { ThemeToggle, Typography } from 'sava-test'
-import { Page } from '../../components/Page'
+import { Page } from '../../../components/Page'
 
-export const Route = createFileRoute('/components/theme-toggle')({
+export const Route = createFileRoute('/components/theme-toggle/')({
   staticData: { name: 'Theme Toggle', icon: 'Sun', order: 2 },
   component: ThemeTogglePage,
 })
