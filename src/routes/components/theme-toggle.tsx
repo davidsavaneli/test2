@@ -3,7 +3,7 @@ import { ThemeToggle, Typography } from 'sava-test'
 import { Page } from '../../components/Page'
 
 export const Route = createFileRoute('/components/theme-toggle')({
-  staticData: { title: 'Theme Toggle', icon: 'Sun', order: 2 },
+  staticData: { name: 'Theme Toggle', icon: 'Sun', order: 2 },
   component: ThemeTogglePage,
 })
 

@@ -3,7 +3,7 @@ import { Checkbox } from 'sava-test'
 import { Page } from '../../../components/Page'
 
 export const Route = createFileRoute('/components/forms/checkbox')({
-  staticData: { title: 'Checkbox', order: 4 },
+  staticData: { name: 'Checkbox', order: 4 },
   component: CheckboxPage,
 })
 

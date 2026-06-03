@@ -3,7 +3,7 @@ import { NumberField } from 'sava-test'
 import { Page } from '../../../components/Page'
 
 export const Route = createFileRoute('/components/forms/number-field')({
-  staticData: { title: 'Number Field', order: 3 },
+  staticData: { name: 'Number Field', order: 3 },
   component: NumberFieldPage,
 })
 

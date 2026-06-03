@@ -3,7 +3,7 @@ import { Icon, TextField } from 'sava-test'
 import { Page } from '../../../components/Page'
 
 export const Route = createFileRoute('/components/forms/text-field')({
-  staticData: { title: 'Text Field', order: 2 },
+  staticData: { name: 'Text Field', order: 2 },
   component: TextFieldPage,
 })
 

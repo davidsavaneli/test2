@@ -1,29 +1,19 @@
 import { useMemo } from 'react'
-import { useRouter } from '@tanstack/react-router'
+import { useRouter, type StaticDataRouteOption } from '@tanstack/react-router'
 import type { IconName, NavGroup, NavModule } from './components/Sidebar'
 
-// Make `staticData` on routes carry the menu metadata, typed.
+// The single source for both routing AND the menu: every route describes itself via `staticData`.
 declare module '@tanstack/react-router' {
   interface StaticDataRouteOption {
-    /** Menu label for this page. A route with no `title` is omitted from the sidebar. */
-    title?: string
-    /** Optional leaf icon (otherwise a bullet is shown). */
+    /** Menu label (like the old IRouteItem `name`). A route with no `name` never appears in the menu. */
+    name?: string
+    /** Optional menu icon. */
     icon?: IconName
-    /** Sort order within the parent group (ascending). Falls back to alphabetical. */
+    /** Sort order within the parent (ascending); falls back to alphabetical. */
     order?: number
+    /** Routed but hidden from the menu — like the old `showInDrawer: false`. */
+    hidden?: boolean
   }
-}
-
-/**
- * Display metadata for CONTAINER segments (modules + groups) — the parts of the menu
- * that aren't themselves pages, so they have nowhere to put `staticData`. Keyed by the
- * path prefix. Everything here is optional: a missing label is auto-prettified from the
- * segment ("forms" → "Forms"). Pages need NO entry here — they self-describe.
- */
-const SECTIONS: Record<string, { label?: string; icon?: IconName; order?: number }> = {
-  components: { label: 'Components', order: 0 },
-  'components/forms': { label: 'Forms', icon: 'DocumentText', order: 0 },
-  'components/display': { label: 'Display', icon: 'Gallery', order: 1 },
 }
 
 const prettify = (seg: string) =>
@@ -59,40 +49,55 @@ interface ModuleAcc {
 }
 
 /**
- * Builds the sidebar tree by walking every route and reading its `staticData`.
- * The URL and grouping come from the route's own path — add a route file with a
- * `title` in `staticData` and it appears in the menu automatically.
+ * Builds the sidebar from the route tree — every route describes itself via `staticData`.
+ * Page chrome lives on the page's own route file; group/module chrome lives on that folder's
+ * `route.tsx`. Nothing in here needs editing to add a page, group, or module.
  */
 export function useNavTree(): NavModule[] {
   const router = useRouter()
   return useMemo(() => {
-    const modules = new Map<string, ModuleAcc>()
-
+    // 1. Collect every route that opts into the menu (has a `name`).
+    const entries: Array<{ path: string; name: string; sd: StaticDataRouteOption }> = []
     for (const route of Object.values(router.looseRoutesById)) {
       const sd = route.options?.staticData
-      if (!sd?.title) continue
-
       const path = trimSlashes(route.fullPath)
-      const segs = path ? path.split('/') : []
-      if (segs.length < 2) continue // only namespaced pages (e.g. /components/...)
+      if (!sd?.name || !path) continue
+      entries.push({ path, name: sd.name, sd })
+    }
 
-      const moduleKey = segs[0]
-      let mod = modules.get(moduleKey)
+    const metaByPath = new Map(entries.map((e) => [e.path, e]))
+    const paths = entries.map((e) => e.path)
+    // A path is a container (module/group) when another menu path nests beneath it.
+    const isContainer = (p: string) => paths.some((o) => o !== p && o.startsWith(`${p}/`))
+
+    // Chrome for a container segment: from its own route's staticData, else the prettified segment.
+    const chrome = (key: string, seg: string) => {
+      const e = metaByPath.get(key)
+      return { label: e?.name ?? prettify(seg), icon: e?.sd.icon, order: e?.sd.order ?? Number.POSITIVE_INFINITY }
+    }
+
+    const modules = new Map<string, ModuleAcc>()
+    const getModule = (seg: string) => {
+      let mod = modules.get(seg)
       if (!mod) {
-        const meta = SECTIONS[moduleKey] ?? {}
-        mod = {
-          label: meta.label ?? prettify(moduleKey),
-          icon: meta.icon,
-          order: meta.order ?? Number.POSITIVE_INFINITY,
-          groups: new Map(),
-        }
-        modules.set(moduleKey, mod)
+        const c = chrome(seg, seg)
+        mod = { label: c.label, icon: c.icon, order: c.order, groups: new Map() }
+        modules.set(seg, mod)
       }
+      return mod
+    }
+
+    // 2. Place every page (non-container, non-hidden) under module → group.
+    for (const { path, name, sd } of entries) {
+      if (isContainer(path) || sd.hidden) continue
+      const segs = path.split('/')
+      if (segs.length < 2) continue
+      const mod = getModule(segs[0])
 
       if (segs.length === 2) {
-        // Module-level direct link (level 2, no group) — e.g. /components/theme-toggle.
+        // Level-2 direct link (no group) — e.g. /components/theme-toggle.
         mod.groups.set(path, {
-          label: sd.title,
+          label: name,
           icon: sd.icon,
           to: `/${path}`,
           order: sd.order ?? Number.POSITIVE_INFINITY,
@@ -100,29 +105,18 @@ export function useNavTree(): NavModule[] {
           isContainer: false,
         })
       } else {
-        // Page under a group — e.g. /components/forms/button.
         const groupKey = segs.slice(0, 2).join('/')
         let group = mod.groups.get(groupKey)
         if (!group) {
-          const meta = SECTIONS[groupKey] ?? {}
-          group = {
-            label: meta.label ?? prettify(segs[1]),
-            icon: meta.icon,
-            order: meta.order ?? Number.POSITIVE_INFINITY,
-            leaves: [],
-            isContainer: true,
-          }
+          const c = chrome(groupKey, segs[1])
+          group = { label: c.label, icon: c.icon, order: c.order, leaves: [], isContainer: true }
           mod.groups.set(groupKey, group)
         }
-        group.leaves.push({
-          label: sd.title,
-          to: `/${path}`,
-          icon: sd.icon,
-          order: sd.order ?? Number.POSITIVE_INFINITY,
-        })
+        group.leaves.push({ label: name, to: `/${path}`, icon: sd.icon, order: sd.order ?? Number.POSITIVE_INFINITY })
       }
     }
 
+    // 3. Sort and materialize.
     return [...modules.values()].sort(byOrderThenLabel).map(
       (mod): NavModule => ({
         module: mod.label,

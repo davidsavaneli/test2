@@ -3,7 +3,7 @@ import { Icon, IconButton } from 'sava-test'
 import { Page } from '../../../components/Page'
 
 export const Route = createFileRoute('/components/forms/icon-button')({
-  staticData: { title: 'Icon Button', order: 1 },
+  staticData: { name: 'Icon Button', order: 1 },
   component: IconButtonPage,
 })
 

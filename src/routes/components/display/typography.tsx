@@ -3,7 +3,7 @@ import { Typography } from 'sava-test'
 import { Page } from '../../../components/Page'
 
 export const Route = createFileRoute('/components/display/typography')({
-  staticData: { title: 'Typography', order: 0 },
+  staticData: { name: 'Typography', order: 0 },
   component: TypographyPage,
 })
 

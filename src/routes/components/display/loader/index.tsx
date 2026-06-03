@@ -3,7 +3,7 @@ import { Loader } from 'sava-test'
 import { Page } from '../../../../components/Page'
 
 export const Route = createFileRoute('/components/display/loader/')({
-  staticData: { title: 'Loader', order: 2 },
+  staticData: { name: 'Loader', order: 2 },
   component: LoaderPage,
 })
 
