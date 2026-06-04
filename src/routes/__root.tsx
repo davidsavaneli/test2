@@ -12,6 +12,7 @@ import {
   RootLayout,
   ThemeToggle,
   Typography,
+  hasAccess,
 } from "sava-test";
 import { auth } from "../auth";
 
@@ -25,10 +26,15 @@ const RouterDevtools = import.meta.env.PROD
     );
 
 export const Route = createRootRoute({
-  // Auth guard: block every route except /login until signed in.
-  beforeLoad: ({ location }) => {
+  // One central guard for the whole app — pages only declare `staticData.roles`.
+  beforeLoad: ({ location, matches }) => {
+    // Auth: block every route except /login until signed in.
     if (!auth.isAuthed() && location.pathname !== "/login") {
       throw redirect({ to: "/login" });
+    }
+    // Roles: if any matched route requires roles the user lacks → first allowed page.
+    if (matches.some((m) => !hasAccess(m.staticData?.roles))) {
+      throw redirect({ to: "/" });
     }
   },
   component: RootComponent,

@@ -13,7 +13,7 @@
     "@tanstack/react-router": "^1.170.11",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "sava-test": "^0.0.2",
+    "sava-test": "^0.0.3",
     "zod": "^4.4.3"
   },
   "devDependencies": {

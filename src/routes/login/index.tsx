@@ -25,8 +25,8 @@ function LoginPage() {
   const form = useForm({
     schema,
     defaultValues: { login: '', password: '', keep: false },
-    onSubmit: (v) => {
-      if (auth.login(v.login, v.password, v.keep)) {
+    onSubmit: async (v) => {
+      if (await auth.login(v.login, v.password, v.keep)) {
         navigate({ to: '/' })
       } else {
         setFailed(true)

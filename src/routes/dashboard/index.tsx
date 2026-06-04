@@ -4,8 +4,9 @@ import { Icon, Typography } from 'sava-test'
 import { Page } from '../../components/Page'
 
 // Top-level page — lives outside the Components / Hooks modules.
+// Just declare the allowed roles; the root guard enforces access automatically.
 export const Route = createFileRoute('/dashboard/')({
-  staticData: { name: 'Dashboard', icon: 'Category', order: 0 },
+  staticData: { name: 'Dashboard', icon: 'Category', order: 0, roles: ['Analyst', 'SystemUserManager'] },
   component: DashboardPage,
 })
 

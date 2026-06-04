@@ -6,6 +6,7 @@ import 'sava-test/styles.css'
 import './styles/layout.css'
 import { ThemeProvider } from 'sava-test'
 import { routeTree } from './routeTree.gen'
+import { auth } from './auth'
 
 const router = createRouter({ routeTree })
 
@@ -24,6 +25,8 @@ const theme = {
     dark: { secondary: '#04202b' },
   },
 }
+
+auth.restore() // re-publish stored roles before the router mounts
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
