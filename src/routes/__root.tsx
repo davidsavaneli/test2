@@ -1,7 +1,6 @@
 import { Outlet, createRootRoute } from '@tanstack/react-router'
 import { Suspense, lazy } from 'react'
-import { Icon, ThemeToggle, Typography } from 'sava-test'
-import { Sidebar } from '../components/Sidebar'
+import { Icon, RootLayout, ThemeToggle, Typography } from 'sava-test'
 
 // Devtools are dev-only and code-split out of the production bundle.
 const RouterDevtools = import.meta.env.PROD
@@ -13,35 +12,31 @@ const RouterDevtools = import.meta.env.PROD
     )
 
 export const Route = createRootRoute({
-  component: RootLayout,
+  component: RootComponent,
 })
 
-function RootLayout() {
+function RootComponent() {
   return (
-    <div className="admin-shell">
-      <aside className="admin-sidebar">
-        <div className="admin-brand">
-          <Icon name="Box" color="primary" size="lg" />
-          <Typography variant="h4">Techzy Admin</Typography>
-        </div>
-        <Sidebar />
-      </aside>
-
-      <div className="admin-main">
-        <header className="admin-topbar">
+    <>
+      <RootLayout
+        brand={
+          <>
+            <Icon name="Box" color="primary" size="lg" />
+            <Typography variant="h4">Techzy Admin</Typography>
+          </>
+        }
+        headerStart={
           <Typography variant="subtitle" color="tertiary">
             Test Admin Panel
           </Typography>
-          <ThemeToggle />
-        </header>
-        <main className="admin-content">
-          <Outlet />
-        </main>
-      </div>
-
+        }
+        headerEnd={<ThemeToggle />}
+      >
+        <Outlet />
+      </RootLayout>
       <Suspense>
         <RouterDevtools />
       </Suspense>
-    </div>
+    </>
   )
 }

@@ -1,54 +1,31 @@
-# React + TypeScript + Vite
+# Techzy Admin (test app)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A test admin panel that consumes the **`sava-test`** (`@techzy/ui`) component library — used to
+exercise the library's components, the `RootLayout` shell, and the auto-generated sidebar.
 
-Currently, two official plugins are available:
+## Stack
+- React 19 + TypeScript + Vite
+- [TanStack Router](https://tanstack.com/router) (file-based routing)
+- UI + shell from `sava-test`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Scripts
+```bash
+npm run dev      # start the dev server
+npm run build    # type-check (tsc -b) + production build
+npm run lint     # eslint
+npm run preview  # preview the production build
+```
 
-## Expanding the ESLint configuration
+## Adding a page
+Pages live under `src/routes/**` and **register themselves in the sidebar** via `staticData` — no
+manual menu wiring:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
+```tsx
+export const Route = createFileRoute('/dashboard/')({
+  staticData: { name: 'Dashboard', icon: 'Category', order: 0 },
+  component: DashboardPage,
 })
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+The shell (`RootLayout`), the sidebar, and the `/` → first-page redirect (`FirstRouteRedirect`) all
+come from `sava-test`. See `CONSUMER.md` for the full library usage guide.

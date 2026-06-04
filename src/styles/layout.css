@@ -1,222 +1,8 @@
-/* App shell — built entirely on the library's theme tokens so it adapts to
-   light/dark automatically. No hardcoded colors. */
+/* App-specific page styles. The admin shell + sidebar styles ship with the library
+   (`sava-test/styles.css`, `.tz-*` classes) and are not duplicated here. */
 
 #root {
   min-height: 100vh;
-}
-
-.admin-shell {
-  display: grid;
-  grid-template-columns: 264px 1fr;
-  min-height: 100vh;
-  background: var(--tz-color-background);
-  color: var(--tz-color-text);
-  font-family: var(--tz-font-family);
-}
-
-/* Sidebar */
-.admin-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: var(--tz-space-lg);
-  padding: var(--tz-space-md);
-  background: var(--tz-color-surface);
-  border-right: 1px solid var(--tz-color-border);
-  overflow-y: auto;
-}
-
-.admin-brand {
-  display: flex;
-  align-items: center;
-  gap: var(--tz-space-sm);
-  padding: var(--tz-space-xs) var(--tz-space-sm);
-}
-
-/* ── Navigation: 3 levels ─────────────────────────────────────────────
-   Level 1: module (section header, not clickable)
-   Level 2: group (collapsible and/or a link)
-   Level 3: leaf (page link)                                            */
-.nav {
-  display: flex;
-  flex-direction: column;
-  gap: var(--tz-space-lg);
-}
-
-.nav-module {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.nav-module__label {
-  display: flex;
-  align-items: center;
-  gap: var(--tz-space-xs);
-  padding: 0 var(--tz-space-sm);
-  margin-bottom: var(--tz-space-xs);
-  color: var(--tz-color-tertiary);
-  font-size: var(--tz-font-size-xs);
-  font-weight: var(--tz-font-weight-bold);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  user-select: none; /* level 1 is never clickable */
-}
-
-/* Shared clickable row used by groups (button) and level-2 links */
-.nav-row {
-  display: flex;
-  align-items: center;
-  gap: var(--tz-space-sm);
-  width: 100%;
-  padding: var(--tz-space-sm);
-  border: none;
-  background: transparent;
-  border-radius: var(--tz-radius-md);
-  color: var(--tz-color-text);
-  font: inherit;
-  font-size: var(--tz-font-size-md);
-  font-weight: var(--tz-font-weight-medium);
-  text-align: left;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-.nav-row:hover {
-  background: var(--tz-color-secondary);
-}
-
-.nav-row[data-active='true'],
-.nav-row[data-status='active'] {
-  color: var(--tz-color-primary);
-  background: var(--tz-color-secondary);
-}
-
-.nav-row__label {
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.nav-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: var(--tz-radius-sm);
-  background: var(--tz-color-secondary);
-  flex: none;
-}
-
-.nav-row[data-active='true'] .nav-icon,
-.nav-row[data-status='active'] .nav-icon {
-  background: var(--tz-color-primary);
-  color: var(--tz-color-primary-contrast);
-}
-
-.nav-chevron {
-  flex: none;
-  color: var(--tz-color-tertiary);
-  transition: transform 0.15s ease;
-}
-
-.nav-chevron[data-open='true'] {
-  transform: rotate(180deg);
-}
-
-/* Level-2 group that is collapsible AND has its own page */
-.nav-combo {
-  display: flex;
-  align-items: center;
-}
-
-.nav-combo .nav-row {
-  flex: 1;
-}
-
-.nav-chevron-btn {
-  flex: none;
-  display: inline-flex;
-  padding: var(--tz-space-xs);
-  border: none;
-  background: transparent;
-  border-radius: var(--tz-radius-sm);
-  color: var(--tz-color-tertiary);
-  cursor: pointer;
-}
-
-.nav-chevron-btn:hover {
-  background: var(--tz-color-secondary);
-}
-
-/* Level 3 */
-.nav-leaves {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin: var(--tz-space-xxs) 0;
-  padding-left: var(--tz-space-xl);
-}
-
-.nav-leaf {
-  display: flex;
-  align-items: center;
-  gap: var(--tz-space-sm);
-  padding: var(--tz-space-xs) var(--tz-space-sm);
-  border-radius: var(--tz-radius-sm);
-  color: var(--tz-color-text);
-  text-decoration: none;
-  font-size: var(--tz-font-size-sm);
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-.nav-leaf:hover {
-  background: var(--tz-color-secondary);
-}
-
-.nav-leaf[data-status='active'] {
-  background: var(--tz-color-secondary);
-  color: var(--tz-color-primary);
-  font-weight: var(--tz-font-weight-medium);
-}
-
-.nav-leaf__dot {
-  width: 5px;
-  height: 5px;
-  margin: 0 var(--tz-space-xxs);
-  border-radius: 50%;
-  background: currentColor;
-  opacity: 0.45;
-  flex: none;
-}
-
-.nav-leaf[data-status='active'] .nav-leaf__dot {
-  opacity: 1;
-}
-
-/* Main column */
-.admin-main {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.admin-topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--tz-space-md);
-  padding: var(--tz-space-md) var(--tz-space-xl);
-  background: var(--tz-color-surface);
-  border-bottom: 1px solid var(--tz-color-border);
-}
-
-.admin-content {
-  flex: 1;
-  padding: var(--tz-space-xl);
 }
 
 .page-header {
@@ -226,7 +12,6 @@
   margin-bottom: var(--tz-space-xl);
 }
 
-/* Cards + demo helpers */
 .card {
   padding: var(--tz-space-xl);
   background: var(--tz-color-surface);
@@ -253,4 +38,32 @@
   flex-direction: column;
   gap: var(--tz-space-md);
   max-width: 420px;
+}
+
+/* Dashboard stat cards */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--tz-space-lg);
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tz-space-sm);
+  padding: var(--tz-space-lg);
+  background: var(--tz-color-surface);
+  border: 1px solid var(--tz-color-border);
+  border-radius: var(--tz-radius-lg);
+  box-shadow: var(--tz-shadow-xs);
+}
+
+.stat-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--tz-radius-md);
+  background: var(--tz-color-secondary);
 }

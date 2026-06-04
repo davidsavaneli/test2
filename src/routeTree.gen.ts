@@ -10,10 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as ComponentsFormsRouteRouteImport } from './routes/components/forms/route'
 import { Route as ComponentsDisplayRouteRouteImport } from './routes/components/display/route'
 import { Route as HooksUseMediaQueryIndexRouteImport } from './routes/hooks/use-media-query/index'
 import { Route as ComponentsThemeToggleIndexRouteImport } from './routes/components/theme-toggle/index'
+import { Route as ComponentsFormsIndexRouteImport } from './routes/components/forms/index'
 import { Route as ComponentsFormsTextFieldIndexRouteImport } from './routes/components/forms/text-field/index'
 import { Route as ComponentsFormsNumberFieldIndexRouteImport } from './routes/components/forms/number-field/index'
 import { Route as ComponentsFormsIconButtonIndexRouteImport } from './routes/components/forms/icon-button/index'
@@ -26,6 +28,11 @@ import { Route as ComponentsDisplayIconIndexRouteImport } from './routes/compone
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/dashboard/',
+  path: '/dashboard/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComponentsFormsRouteRoute = ComponentsFormsRouteRouteImport.update({
@@ -49,6 +56,11 @@ const ComponentsThemeToggleIndexRoute =
     path: '/components/theme-toggle/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ComponentsFormsIndexRoute = ComponentsFormsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ComponentsFormsRouteRoute,
+} as any)
 const ComponentsFormsTextFieldIndexRoute =
   ComponentsFormsTextFieldIndexRouteImport.update({
     id: '/text-field/',
@@ -102,6 +114,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/components/display': typeof ComponentsDisplayRouteRouteWithChildren
   '/components/forms': typeof ComponentsFormsRouteRouteWithChildren
+  '/dashboard/': typeof DashboardIndexRoute
+  '/components/forms/': typeof ComponentsFormsIndexRoute
   '/components/theme-toggle/': typeof ComponentsThemeToggleIndexRoute
   '/hooks/use-media-query/': typeof HooksUseMediaQueryIndexRoute
   '/components/display/icon/': typeof ComponentsDisplayIconIndexRoute
@@ -116,7 +130,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/components/display': typeof ComponentsDisplayRouteRouteWithChildren
-  '/components/forms': typeof ComponentsFormsRouteRouteWithChildren
+  '/dashboard': typeof DashboardIndexRoute
+  '/components/forms': typeof ComponentsFormsIndexRoute
   '/components/theme-toggle': typeof ComponentsThemeToggleIndexRoute
   '/hooks/use-media-query': typeof HooksUseMediaQueryIndexRoute
   '/components/display/icon': typeof ComponentsDisplayIconIndexRoute
@@ -133,6 +148,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/components/display': typeof ComponentsDisplayRouteRouteWithChildren
   '/components/forms': typeof ComponentsFormsRouteRouteWithChildren
+  '/dashboard/': typeof DashboardIndexRoute
+  '/components/forms/': typeof ComponentsFormsIndexRoute
   '/components/theme-toggle/': typeof ComponentsThemeToggleIndexRoute
   '/hooks/use-media-query/': typeof HooksUseMediaQueryIndexRoute
   '/components/display/icon/': typeof ComponentsDisplayIconIndexRoute
@@ -150,6 +167,8 @@ export interface FileRouteTypes {
     | '/'
     | '/components/display'
     | '/components/forms'
+    | '/dashboard/'
+    | '/components/forms/'
     | '/components/theme-toggle/'
     | '/hooks/use-media-query/'
     | '/components/display/icon/'
@@ -164,6 +183,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/components/display'
+    | '/dashboard'
     | '/components/forms'
     | '/components/theme-toggle'
     | '/hooks/use-media-query'
@@ -180,6 +200,8 @@ export interface FileRouteTypes {
     | '/'
     | '/components/display'
     | '/components/forms'
+    | '/dashboard/'
+    | '/components/forms/'
     | '/components/theme-toggle/'
     | '/hooks/use-media-query/'
     | '/components/display/icon/'
@@ -196,6 +218,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ComponentsDisplayRouteRoute: typeof ComponentsDisplayRouteRouteWithChildren
   ComponentsFormsRouteRoute: typeof ComponentsFormsRouteRouteWithChildren
+  DashboardIndexRoute: typeof DashboardIndexRoute
   ComponentsThemeToggleIndexRoute: typeof ComponentsThemeToggleIndexRoute
   HooksUseMediaQueryIndexRoute: typeof HooksUseMediaQueryIndexRoute
 }
@@ -207,6 +230,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components/forms': {
@@ -236,6 +266,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/components/theme-toggle/'
       preLoaderRoute: typeof ComponentsThemeToggleIndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/components/forms/': {
+      id: '/components/forms/'
+      path: '/'
+      fullPath: '/components/forms/'
+      preLoaderRoute: typeof ComponentsFormsIndexRouteImport
+      parentRoute: typeof ComponentsFormsRouteRoute
     }
     '/components/forms/text-field/': {
       id: '/components/forms/text-field/'
@@ -316,6 +353,7 @@ const ComponentsDisplayRouteRouteWithChildren =
   )
 
 interface ComponentsFormsRouteRouteChildren {
+  ComponentsFormsIndexRoute: typeof ComponentsFormsIndexRoute
   ComponentsFormsButtonIndexRoute: typeof ComponentsFormsButtonIndexRoute
   ComponentsFormsCheckboxIndexRoute: typeof ComponentsFormsCheckboxIndexRoute
   ComponentsFormsIconButtonIndexRoute: typeof ComponentsFormsIconButtonIndexRoute
@@ -324,6 +362,7 @@ interface ComponentsFormsRouteRouteChildren {
 }
 
 const ComponentsFormsRouteRouteChildren: ComponentsFormsRouteRouteChildren = {
+  ComponentsFormsIndexRoute: ComponentsFormsIndexRoute,
   ComponentsFormsButtonIndexRoute: ComponentsFormsButtonIndexRoute,
   ComponentsFormsCheckboxIndexRoute: ComponentsFormsCheckboxIndexRoute,
   ComponentsFormsIconButtonIndexRoute: ComponentsFormsIconButtonIndexRoute,
@@ -338,6 +377,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ComponentsDisplayRouteRoute: ComponentsDisplayRouteRouteWithChildren,
   ComponentsFormsRouteRoute: ComponentsFormsRouteRouteWithChildren,
+  DashboardIndexRoute: DashboardIndexRoute,
   ComponentsThemeToggleIndexRoute: ComponentsThemeToggleIndexRoute,
   HooksUseMediaQueryIndexRoute: HooksUseMediaQueryIndexRoute,
 }
