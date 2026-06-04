@@ -67,3 +67,17 @@
   border-radius: var(--tz-radius-md);
   background: var(--tz-color-secondary);
 }
+
+/* Login screen (rendered without the admin shell) */
+.login-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--tz-space-xl);
+  background: var(--tz-color-background);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 360px;
+}

@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as ComponentsFormsRouteRouteImport } from './routes/components/forms/route'
 import { Route as ComponentsDisplayRouteRouteImport } from './routes/components/display/route'
@@ -28,6 +29,11 @@ import { Route as ComponentsDisplayIconIndexRouteImport } from './routes/compone
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginIndexRoute = LoginIndexRouteImport.update({
+  id: '/login/',
+  path: '/login/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
@@ -115,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/components/display': typeof ComponentsDisplayRouteRouteWithChildren
   '/components/forms': typeof ComponentsFormsRouteRouteWithChildren
   '/dashboard/': typeof DashboardIndexRoute
+  '/login/': typeof LoginIndexRoute
   '/components/forms/': typeof ComponentsFormsIndexRoute
   '/components/theme-toggle/': typeof ComponentsThemeToggleIndexRoute
   '/hooks/use-media-query/': typeof HooksUseMediaQueryIndexRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/components/display': typeof ComponentsDisplayRouteRouteWithChildren
   '/dashboard': typeof DashboardIndexRoute
+  '/login': typeof LoginIndexRoute
   '/components/forms': typeof ComponentsFormsIndexRoute
   '/components/theme-toggle': typeof ComponentsThemeToggleIndexRoute
   '/hooks/use-media-query': typeof HooksUseMediaQueryIndexRoute
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/components/display': typeof ComponentsDisplayRouteRouteWithChildren
   '/components/forms': typeof ComponentsFormsRouteRouteWithChildren
   '/dashboard/': typeof DashboardIndexRoute
+  '/login/': typeof LoginIndexRoute
   '/components/forms/': typeof ComponentsFormsIndexRoute
   '/components/theme-toggle/': typeof ComponentsThemeToggleIndexRoute
   '/hooks/use-media-query/': typeof HooksUseMediaQueryIndexRoute
@@ -168,6 +177,7 @@ export interface FileRouteTypes {
     | '/components/display'
     | '/components/forms'
     | '/dashboard/'
+    | '/login/'
     | '/components/forms/'
     | '/components/theme-toggle/'
     | '/hooks/use-media-query/'
@@ -184,6 +194,7 @@ export interface FileRouteTypes {
     | '/'
     | '/components/display'
     | '/dashboard'
+    | '/login'
     | '/components/forms'
     | '/components/theme-toggle'
     | '/hooks/use-media-query'
@@ -201,6 +212,7 @@ export interface FileRouteTypes {
     | '/components/display'
     | '/components/forms'
     | '/dashboard/'
+    | '/login/'
     | '/components/forms/'
     | '/components/theme-toggle/'
     | '/hooks/use-media-query/'
@@ -219,6 +231,7 @@ export interface RootRouteChildren {
   ComponentsDisplayRouteRoute: typeof ComponentsDisplayRouteRouteWithChildren
   ComponentsFormsRouteRoute: typeof ComponentsFormsRouteRouteWithChildren
   DashboardIndexRoute: typeof DashboardIndexRoute
+  LoginIndexRoute: typeof LoginIndexRoute
   ComponentsThemeToggleIndexRoute: typeof ComponentsThemeToggleIndexRoute
   HooksUseMediaQueryIndexRoute: typeof HooksUseMediaQueryIndexRoute
 }
@@ -230,6 +243,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login/': {
+      id: '/login/'
+      path: '/login'
+      fullPath: '/login/'
+      preLoaderRoute: typeof LoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard/': {
@@ -378,6 +398,7 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentsDisplayRouteRoute: ComponentsDisplayRouteRouteWithChildren,
   ComponentsFormsRouteRoute: ComponentsFormsRouteRouteWithChildren,
   DashboardIndexRoute: DashboardIndexRoute,
+  LoginIndexRoute: LoginIndexRoute,
   ComponentsThemeToggleIndexRoute: ComponentsThemeToggleIndexRoute,
   HooksUseMediaQueryIndexRoute: HooksUseMediaQueryIndexRoute,
 }

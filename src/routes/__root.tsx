@@ -1,21 +1,48 @@
-import { Outlet, createRootRoute } from '@tanstack/react-router'
-import { Suspense, lazy } from 'react'
-import { Icon, RootLayout, ThemeToggle, Typography } from 'sava-test'
+import {
+  Outlet,
+  createRootRoute,
+  redirect,
+  useNavigate,
+  useRouterState,
+} from "@tanstack/react-router";
+import { Suspense, lazy } from "react";
+import {
+  Icon,
+  IconButton,
+  RootLayout,
+  ThemeToggle,
+  Typography,
+} from "sava-test";
+import { auth } from "../auth";
 
 // Devtools are dev-only and code-split out of the production bundle.
 const RouterDevtools = import.meta.env.PROD
   ? () => null
   : lazy(() =>
-      import('@tanstack/react-router-devtools').then((m) => ({
+      import("@tanstack/react-router-devtools").then((m) => ({
         default: m.TanStackRouterDevtools,
       })),
-    )
+    );
 
 export const Route = createRootRoute({
+  // Auth guard: block every route except /login until signed in.
+  beforeLoad: ({ location }) => {
+    if (!auth.isAuthed() && location.pathname !== "/login") {
+      throw redirect({ to: "/login" });
+    }
+  },
   component: RootComponent,
-})
+});
 
 function RootComponent() {
+  const isLogin = useRouterState({
+    select: (s) => s.location.pathname === "/login",
+  });
+  const navigate = useNavigate();
+
+  // The login page renders bare — no sidebar/header shell.
+  if (isLogin) return <Outlet />;
+
   return (
     <>
       <RootLayout
@@ -30,7 +57,21 @@ function RootComponent() {
             Test Admin Panel
           </Typography>
         }
-        headerEnd={<ThemeToggle />}
+        headerEnd={
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <ThemeToggle />
+            <IconButton
+              aria-label="Log out"
+              variant="text"
+              onClick={() => {
+                auth.logout();
+                navigate({ to: "/login" });
+              }}
+            >
+              <Icon name="Logout" />
+            </IconButton>
+          </div>
+        }
       >
         <Outlet />
       </RootLayout>
@@ -38,5 +79,5 @@ function RootComponent() {
         <RouterDevtools />
       </Suspense>
     </>
-  )
+  );
 }
