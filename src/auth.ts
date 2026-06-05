@@ -1,4 +1,4 @@
-import { setAccessKeys } from 'sava-test'
+import { setAccessKeys } from 'sava-test/helpers'
 
 const TOKEN = 'techzy-auth'
 const KEYS = 'techzy-keys'

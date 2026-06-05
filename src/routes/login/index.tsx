@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router'
 import { z } from 'zod'
-import { Button, Checkbox, Form, TextField, Typography, useForm } from 'sava-test'
+import { Button, Checkbox, Form, TextField, Typography } from 'sava-test/components'
+import { useForm } from 'sava-test/hooks'
 import { auth } from '../../auth'
 
 // No `staticData.name` → never shown in the sidebar menu.
@@ -40,7 +41,10 @@ function LoginPage() {
         <Typography variant="h3" align="center">
           Sign In
         </Typography>
-        <Form form={form} style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 20 }}>
+        <Form
+          form={form}
+          style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 20 }}
+        >
           <TextField name="login" label="Username or Email" placeholder="you@example.com" />
           <TextField name="password" type="password" label="Password" placeholder="••••••••" />
           <Checkbox name="keep" label="Keep Me Signed In" />

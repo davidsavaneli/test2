@@ -4,11 +4,13 @@ A test admin panel that consumes the **`sava-test`** (`@techzy/ui`) component li
 exercise the library's components, the `RootLayout` shell, and the auto-generated sidebar.
 
 ## Stack
+
 - React 19 + TypeScript + Vite
 - [TanStack Router](https://tanstack.com/router) (file-based routing)
 - UI + shell from `sava-test`
 
 ## Scripts
+
 ```bash
 npm run dev      # start the dev server
 npm run build    # type-check (tsc -b) + production build
@@ -17,6 +19,7 @@ npm run preview  # preview the production build
 ```
 
 ## Adding a page
+
 Pages live under `src/routes/**` and **register themselves in the sidebar** via `staticData` — no
 manual menu wiring:
 

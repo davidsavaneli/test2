@@ -1,6 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Loader } from 'sava-test'
-import { Page } from '../../../../components/Page'
+import { Loader } from 'sava-test/components'
 
 export const Route = createFileRoute('/components/display/loader/')({
   staticData: { name: 'Loader', order: 2 },
@@ -9,20 +8,18 @@ export const Route = createFileRoute('/components/display/loader/')({
 
 function LoaderPage() {
   return (
-    <Page title="Loader" description="Circular spinner — sizes and brand colors.">
-      <div className="card demo-stack">
-        <div className="demo-row">
-          <Loader size="sm" />
-          <Loader size="md" />
-          <Loader size="lg" />
-        </div>
-        <div className="demo-row">
-          <Loader color="primary" size="lg" />
-          <Loader color="success" size="lg" />
-          <Loader color="error" size="lg" />
-          <Loader color="warning" size="lg" />
-        </div>
+    <div className="card demo-stack">
+      <div className="demo-row">
+        <Loader size="sm" />
+        <Loader size="md" />
+        <Loader size="lg" />
       </div>
-    </Page>
+      <div className="demo-row">
+        <Loader color="primary" size="lg" />
+        <Loader color="success" size="lg" />
+        <Loader color="error" size="lg" />
+        <Loader color="warning" size="lg" />
+      </div>
+    </div>
   )
 }

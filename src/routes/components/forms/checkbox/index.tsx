@@ -1,6 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Checkbox } from 'sava-test'
-import { Page } from '../../../../components/Page'
+import { Checkbox } from 'sava-test/components'
 
 export const Route = createFileRoute('/components/forms/checkbox/')({
   staticData: { name: 'Checkbox', order: 4 },
@@ -9,14 +8,12 @@ export const Route = createFileRoute('/components/forms/checkbox/')({
 
 function CheckboxPage() {
   return (
-    <Page title="Checkbox" description="Boolean input with label, colors and states.">
-      <div className="card demo-stack">
-        <Checkbox label="Default" />
-        <Checkbox label="Checked" defaultChecked />
-        <Checkbox label="Success Color" color="success" defaultChecked />
-        <Checkbox label="Error State" error helperText="You must accept" />
-        <Checkbox label="Disabled" disabled />
-      </div>
-    </Page>
+    <div className="card demo-stack">
+      <Checkbox label="Default" />
+      <Checkbox label="Checked" defaultChecked />
+      <Checkbox label="Success Color" color="success" defaultChecked />
+      <Checkbox label="Error State" error helperText="You must accept" />
+      <Checkbox label="Disabled" disabled />
+    </div>
   )
 }
