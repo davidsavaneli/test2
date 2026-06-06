@@ -11,19 +11,29 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
+import { Route as ComponentsLayoutRouteRouteImport } from './routes/components/layout/route'
 import { Route as ComponentsFormsRouteRouteImport } from './routes/components/forms/route'
 import { Route as ComponentsDisplayRouteRouteImport } from './routes/components/display/route'
 import { Route as HooksUseMediaQueryIndexRouteImport } from './routes/hooks/use-media-query/index'
 import { Route as ComponentsThemeToggleIndexRouteImport } from './routes/components/theme-toggle/index'
 import { Route as ComponentsFormsIndexRouteImport } from './routes/components/forms/index'
+import { Route as ComponentsLayoutRowIndexRouteImport } from './routes/components/layout/row/index'
+import { Route as ComponentsLayoutGridIndexRouteImport } from './routes/components/layout/grid/index'
+import { Route as ComponentsLayoutFlexIndexRouteImport } from './routes/components/layout/flex/index'
+import { Route as ComponentsLayoutColIndexRouteImport } from './routes/components/layout/col/index'
 import { Route as ComponentsFormsTextFieldIndexRouteImport } from './routes/components/forms/text-field/index'
 import { Route as ComponentsFormsNumberFieldIndexRouteImport } from './routes/components/forms/number-field/index'
 import { Route as ComponentsFormsIconButtonIndexRouteImport } from './routes/components/forms/icon-button/index'
 import { Route as ComponentsFormsCheckboxIndexRouteImport } from './routes/components/forms/checkbox/index'
 import { Route as ComponentsFormsButtonIndexRouteImport } from './routes/components/forms/button/index'
 import { Route as ComponentsDisplayTypographyIndexRouteImport } from './routes/components/display/typography/index'
+import { Route as ComponentsDisplayTooltipIndexRouteImport } from './routes/components/display/tooltip/index'
 import { Route as ComponentsDisplayLoaderIndexRouteImport } from './routes/components/display/loader/index'
 import { Route as ComponentsDisplayIconIndexRouteImport } from './routes/components/display/icon/index'
+import { Route as ComponentsDisplayDividerIndexRouteImport } from './routes/components/display/divider/index'
+import { Route as ComponentsDisplayChipIndexRouteImport } from './routes/components/display/chip/index'
+import { Route as ComponentsDisplayBadgeIndexRouteImport } from './routes/components/display/badge/index'
+import { Route as ComponentsDisplayAvatarIndexRouteImport } from './routes/components/display/avatar/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -33,6 +43,11 @@ const IndexRoute = IndexRouteImport.update({
 const LoginIndexRoute = LoginIndexRouteImport.update({
   id: '/login/',
   path: '/login/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsLayoutRouteRoute = ComponentsLayoutRouteRouteImport.update({
+  id: '/components/layout',
+  path: '/components/layout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComponentsFormsRouteRoute = ComponentsFormsRouteRouteImport.update({
@@ -61,6 +76,30 @@ const ComponentsFormsIndexRoute = ComponentsFormsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ComponentsFormsRouteRoute,
 } as any)
+const ComponentsLayoutRowIndexRoute =
+  ComponentsLayoutRowIndexRouteImport.update({
+    id: '/row/',
+    path: '/row/',
+    getParentRoute: () => ComponentsLayoutRouteRoute,
+  } as any)
+const ComponentsLayoutGridIndexRoute =
+  ComponentsLayoutGridIndexRouteImport.update({
+    id: '/grid/',
+    path: '/grid/',
+    getParentRoute: () => ComponentsLayoutRouteRoute,
+  } as any)
+const ComponentsLayoutFlexIndexRoute =
+  ComponentsLayoutFlexIndexRouteImport.update({
+    id: '/flex/',
+    path: '/flex/',
+    getParentRoute: () => ComponentsLayoutRouteRoute,
+  } as any)
+const ComponentsLayoutColIndexRoute =
+  ComponentsLayoutColIndexRouteImport.update({
+    id: '/col/',
+    path: '/col/',
+    getParentRoute: () => ComponentsLayoutRouteRoute,
+  } as any)
 const ComponentsFormsTextFieldIndexRoute =
   ComponentsFormsTextFieldIndexRouteImport.update({
     id: '/text-field/',
@@ -97,6 +136,12 @@ const ComponentsDisplayTypographyIndexRoute =
     path: '/typography/',
     getParentRoute: () => ComponentsDisplayRouteRoute,
   } as any)
+const ComponentsDisplayTooltipIndexRoute =
+  ComponentsDisplayTooltipIndexRouteImport.update({
+    id: '/tooltip/',
+    path: '/tooltip/',
+    getParentRoute: () => ComponentsDisplayRouteRoute,
+  } as any)
 const ComponentsDisplayLoaderIndexRoute =
   ComponentsDisplayLoaderIndexRouteImport.update({
     id: '/loader/',
@@ -109,57 +154,111 @@ const ComponentsDisplayIconIndexRoute =
     path: '/icon/',
     getParentRoute: () => ComponentsDisplayRouteRoute,
   } as any)
+const ComponentsDisplayDividerIndexRoute =
+  ComponentsDisplayDividerIndexRouteImport.update({
+    id: '/divider/',
+    path: '/divider/',
+    getParentRoute: () => ComponentsDisplayRouteRoute,
+  } as any)
+const ComponentsDisplayChipIndexRoute =
+  ComponentsDisplayChipIndexRouteImport.update({
+    id: '/chip/',
+    path: '/chip/',
+    getParentRoute: () => ComponentsDisplayRouteRoute,
+  } as any)
+const ComponentsDisplayBadgeIndexRoute =
+  ComponentsDisplayBadgeIndexRouteImport.update({
+    id: '/badge/',
+    path: '/badge/',
+    getParentRoute: () => ComponentsDisplayRouteRoute,
+  } as any)
+const ComponentsDisplayAvatarIndexRoute =
+  ComponentsDisplayAvatarIndexRouteImport.update({
+    id: '/avatar/',
+    path: '/avatar/',
+    getParentRoute: () => ComponentsDisplayRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/components/display': typeof ComponentsDisplayRouteRouteWithChildren
   '/components/forms': typeof ComponentsFormsRouteRouteWithChildren
+  '/components/layout': typeof ComponentsLayoutRouteRouteWithChildren
   '/login/': typeof LoginIndexRoute
   '/components/forms/': typeof ComponentsFormsIndexRoute
   '/components/theme-toggle/': typeof ComponentsThemeToggleIndexRoute
   '/hooks/use-media-query/': typeof HooksUseMediaQueryIndexRoute
+  '/components/display/avatar/': typeof ComponentsDisplayAvatarIndexRoute
+  '/components/display/badge/': typeof ComponentsDisplayBadgeIndexRoute
+  '/components/display/chip/': typeof ComponentsDisplayChipIndexRoute
+  '/components/display/divider/': typeof ComponentsDisplayDividerIndexRoute
   '/components/display/icon/': typeof ComponentsDisplayIconIndexRoute
   '/components/display/loader/': typeof ComponentsDisplayLoaderIndexRoute
+  '/components/display/tooltip/': typeof ComponentsDisplayTooltipIndexRoute
   '/components/display/typography/': typeof ComponentsDisplayTypographyIndexRoute
   '/components/forms/button/': typeof ComponentsFormsButtonIndexRoute
   '/components/forms/checkbox/': typeof ComponentsFormsCheckboxIndexRoute
   '/components/forms/icon-button/': typeof ComponentsFormsIconButtonIndexRoute
   '/components/forms/number-field/': typeof ComponentsFormsNumberFieldIndexRoute
   '/components/forms/text-field/': typeof ComponentsFormsTextFieldIndexRoute
+  '/components/layout/col/': typeof ComponentsLayoutColIndexRoute
+  '/components/layout/flex/': typeof ComponentsLayoutFlexIndexRoute
+  '/components/layout/grid/': typeof ComponentsLayoutGridIndexRoute
+  '/components/layout/row/': typeof ComponentsLayoutRowIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/components/display': typeof ComponentsDisplayRouteRouteWithChildren
+  '/components/layout': typeof ComponentsLayoutRouteRouteWithChildren
   '/login': typeof LoginIndexRoute
   '/components/forms': typeof ComponentsFormsIndexRoute
   '/components/theme-toggle': typeof ComponentsThemeToggleIndexRoute
   '/hooks/use-media-query': typeof HooksUseMediaQueryIndexRoute
+  '/components/display/avatar': typeof ComponentsDisplayAvatarIndexRoute
+  '/components/display/badge': typeof ComponentsDisplayBadgeIndexRoute
+  '/components/display/chip': typeof ComponentsDisplayChipIndexRoute
+  '/components/display/divider': typeof ComponentsDisplayDividerIndexRoute
   '/components/display/icon': typeof ComponentsDisplayIconIndexRoute
   '/components/display/loader': typeof ComponentsDisplayLoaderIndexRoute
+  '/components/display/tooltip': typeof ComponentsDisplayTooltipIndexRoute
   '/components/display/typography': typeof ComponentsDisplayTypographyIndexRoute
   '/components/forms/button': typeof ComponentsFormsButtonIndexRoute
   '/components/forms/checkbox': typeof ComponentsFormsCheckboxIndexRoute
   '/components/forms/icon-button': typeof ComponentsFormsIconButtonIndexRoute
   '/components/forms/number-field': typeof ComponentsFormsNumberFieldIndexRoute
   '/components/forms/text-field': typeof ComponentsFormsTextFieldIndexRoute
+  '/components/layout/col': typeof ComponentsLayoutColIndexRoute
+  '/components/layout/flex': typeof ComponentsLayoutFlexIndexRoute
+  '/components/layout/grid': typeof ComponentsLayoutGridIndexRoute
+  '/components/layout/row': typeof ComponentsLayoutRowIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/components/display': typeof ComponentsDisplayRouteRouteWithChildren
   '/components/forms': typeof ComponentsFormsRouteRouteWithChildren
+  '/components/layout': typeof ComponentsLayoutRouteRouteWithChildren
   '/login/': typeof LoginIndexRoute
   '/components/forms/': typeof ComponentsFormsIndexRoute
   '/components/theme-toggle/': typeof ComponentsThemeToggleIndexRoute
   '/hooks/use-media-query/': typeof HooksUseMediaQueryIndexRoute
+  '/components/display/avatar/': typeof ComponentsDisplayAvatarIndexRoute
+  '/components/display/badge/': typeof ComponentsDisplayBadgeIndexRoute
+  '/components/display/chip/': typeof ComponentsDisplayChipIndexRoute
+  '/components/display/divider/': typeof ComponentsDisplayDividerIndexRoute
   '/components/display/icon/': typeof ComponentsDisplayIconIndexRoute
   '/components/display/loader/': typeof ComponentsDisplayLoaderIndexRoute
+  '/components/display/tooltip/': typeof ComponentsDisplayTooltipIndexRoute
   '/components/display/typography/': typeof ComponentsDisplayTypographyIndexRoute
   '/components/forms/button/': typeof ComponentsFormsButtonIndexRoute
   '/components/forms/checkbox/': typeof ComponentsFormsCheckboxIndexRoute
   '/components/forms/icon-button/': typeof ComponentsFormsIconButtonIndexRoute
   '/components/forms/number-field/': typeof ComponentsFormsNumberFieldIndexRoute
   '/components/forms/text-field/': typeof ComponentsFormsTextFieldIndexRoute
+  '/components/layout/col/': typeof ComponentsLayoutColIndexRoute
+  '/components/layout/flex/': typeof ComponentsLayoutFlexIndexRoute
+  '/components/layout/grid/': typeof ComponentsLayoutGridIndexRoute
+  '/components/layout/row/': typeof ComponentsLayoutRowIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -167,57 +266,88 @@ export interface FileRouteTypes {
     | '/'
     | '/components/display'
     | '/components/forms'
+    | '/components/layout'
     | '/login/'
     | '/components/forms/'
     | '/components/theme-toggle/'
     | '/hooks/use-media-query/'
+    | '/components/display/avatar/'
+    | '/components/display/badge/'
+    | '/components/display/chip/'
+    | '/components/display/divider/'
     | '/components/display/icon/'
     | '/components/display/loader/'
+    | '/components/display/tooltip/'
     | '/components/display/typography/'
     | '/components/forms/button/'
     | '/components/forms/checkbox/'
     | '/components/forms/icon-button/'
     | '/components/forms/number-field/'
     | '/components/forms/text-field/'
+    | '/components/layout/col/'
+    | '/components/layout/flex/'
+    | '/components/layout/grid/'
+    | '/components/layout/row/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/components/display'
+    | '/components/layout'
     | '/login'
     | '/components/forms'
     | '/components/theme-toggle'
     | '/hooks/use-media-query'
+    | '/components/display/avatar'
+    | '/components/display/badge'
+    | '/components/display/chip'
+    | '/components/display/divider'
     | '/components/display/icon'
     | '/components/display/loader'
+    | '/components/display/tooltip'
     | '/components/display/typography'
     | '/components/forms/button'
     | '/components/forms/checkbox'
     | '/components/forms/icon-button'
     | '/components/forms/number-field'
     | '/components/forms/text-field'
+    | '/components/layout/col'
+    | '/components/layout/flex'
+    | '/components/layout/grid'
+    | '/components/layout/row'
   id:
     | '__root__'
     | '/'
     | '/components/display'
     | '/components/forms'
+    | '/components/layout'
     | '/login/'
     | '/components/forms/'
     | '/components/theme-toggle/'
     | '/hooks/use-media-query/'
+    | '/components/display/avatar/'
+    | '/components/display/badge/'
+    | '/components/display/chip/'
+    | '/components/display/divider/'
     | '/components/display/icon/'
     | '/components/display/loader/'
+    | '/components/display/tooltip/'
     | '/components/display/typography/'
     | '/components/forms/button/'
     | '/components/forms/checkbox/'
     | '/components/forms/icon-button/'
     | '/components/forms/number-field/'
     | '/components/forms/text-field/'
+    | '/components/layout/col/'
+    | '/components/layout/flex/'
+    | '/components/layout/grid/'
+    | '/components/layout/row/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ComponentsDisplayRouteRoute: typeof ComponentsDisplayRouteRouteWithChildren
   ComponentsFormsRouteRoute: typeof ComponentsFormsRouteRouteWithChildren
+  ComponentsLayoutRouteRoute: typeof ComponentsLayoutRouteRouteWithChildren
   LoginIndexRoute: typeof LoginIndexRoute
   ComponentsThemeToggleIndexRoute: typeof ComponentsThemeToggleIndexRoute
   HooksUseMediaQueryIndexRoute: typeof HooksUseMediaQueryIndexRoute
@@ -237,6 +367,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login/'
       preLoaderRoute: typeof LoginIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/layout': {
+      id: '/components/layout'
+      path: '/components/layout'
+      fullPath: '/components/layout'
+      preLoaderRoute: typeof ComponentsLayoutRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components/forms': {
@@ -273,6 +410,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/components/forms/'
       preLoaderRoute: typeof ComponentsFormsIndexRouteImport
       parentRoute: typeof ComponentsFormsRouteRoute
+    }
+    '/components/layout/row/': {
+      id: '/components/layout/row/'
+      path: '/row'
+      fullPath: '/components/layout/row/'
+      preLoaderRoute: typeof ComponentsLayoutRowIndexRouteImport
+      parentRoute: typeof ComponentsLayoutRouteRoute
+    }
+    '/components/layout/grid/': {
+      id: '/components/layout/grid/'
+      path: '/grid'
+      fullPath: '/components/layout/grid/'
+      preLoaderRoute: typeof ComponentsLayoutGridIndexRouteImport
+      parentRoute: typeof ComponentsLayoutRouteRoute
+    }
+    '/components/layout/flex/': {
+      id: '/components/layout/flex/'
+      path: '/flex'
+      fullPath: '/components/layout/flex/'
+      preLoaderRoute: typeof ComponentsLayoutFlexIndexRouteImport
+      parentRoute: typeof ComponentsLayoutRouteRoute
+    }
+    '/components/layout/col/': {
+      id: '/components/layout/col/'
+      path: '/col'
+      fullPath: '/components/layout/col/'
+      preLoaderRoute: typeof ComponentsLayoutColIndexRouteImport
+      parentRoute: typeof ComponentsLayoutRouteRoute
     }
     '/components/forms/text-field/': {
       id: '/components/forms/text-field/'
@@ -316,6 +481,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsDisplayTypographyIndexRouteImport
       parentRoute: typeof ComponentsDisplayRouteRoute
     }
+    '/components/display/tooltip/': {
+      id: '/components/display/tooltip/'
+      path: '/tooltip'
+      fullPath: '/components/display/tooltip/'
+      preLoaderRoute: typeof ComponentsDisplayTooltipIndexRouteImport
+      parentRoute: typeof ComponentsDisplayRouteRoute
+    }
     '/components/display/loader/': {
       id: '/components/display/loader/'
       path: '/loader'
@@ -330,19 +502,57 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsDisplayIconIndexRouteImport
       parentRoute: typeof ComponentsDisplayRouteRoute
     }
+    '/components/display/divider/': {
+      id: '/components/display/divider/'
+      path: '/divider'
+      fullPath: '/components/display/divider/'
+      preLoaderRoute: typeof ComponentsDisplayDividerIndexRouteImport
+      parentRoute: typeof ComponentsDisplayRouteRoute
+    }
+    '/components/display/chip/': {
+      id: '/components/display/chip/'
+      path: '/chip'
+      fullPath: '/components/display/chip/'
+      preLoaderRoute: typeof ComponentsDisplayChipIndexRouteImport
+      parentRoute: typeof ComponentsDisplayRouteRoute
+    }
+    '/components/display/badge/': {
+      id: '/components/display/badge/'
+      path: '/badge'
+      fullPath: '/components/display/badge/'
+      preLoaderRoute: typeof ComponentsDisplayBadgeIndexRouteImport
+      parentRoute: typeof ComponentsDisplayRouteRoute
+    }
+    '/components/display/avatar/': {
+      id: '/components/display/avatar/'
+      path: '/avatar'
+      fullPath: '/components/display/avatar/'
+      preLoaderRoute: typeof ComponentsDisplayAvatarIndexRouteImport
+      parentRoute: typeof ComponentsDisplayRouteRoute
+    }
   }
 }
 
 interface ComponentsDisplayRouteRouteChildren {
+  ComponentsDisplayAvatarIndexRoute: typeof ComponentsDisplayAvatarIndexRoute
+  ComponentsDisplayBadgeIndexRoute: typeof ComponentsDisplayBadgeIndexRoute
+  ComponentsDisplayChipIndexRoute: typeof ComponentsDisplayChipIndexRoute
+  ComponentsDisplayDividerIndexRoute: typeof ComponentsDisplayDividerIndexRoute
   ComponentsDisplayIconIndexRoute: typeof ComponentsDisplayIconIndexRoute
   ComponentsDisplayLoaderIndexRoute: typeof ComponentsDisplayLoaderIndexRoute
+  ComponentsDisplayTooltipIndexRoute: typeof ComponentsDisplayTooltipIndexRoute
   ComponentsDisplayTypographyIndexRoute: typeof ComponentsDisplayTypographyIndexRoute
 }
 
 const ComponentsDisplayRouteRouteChildren: ComponentsDisplayRouteRouteChildren =
   {
+    ComponentsDisplayAvatarIndexRoute: ComponentsDisplayAvatarIndexRoute,
+    ComponentsDisplayBadgeIndexRoute: ComponentsDisplayBadgeIndexRoute,
+    ComponentsDisplayChipIndexRoute: ComponentsDisplayChipIndexRoute,
+    ComponentsDisplayDividerIndexRoute: ComponentsDisplayDividerIndexRoute,
     ComponentsDisplayIconIndexRoute: ComponentsDisplayIconIndexRoute,
     ComponentsDisplayLoaderIndexRoute: ComponentsDisplayLoaderIndexRoute,
+    ComponentsDisplayTooltipIndexRoute: ComponentsDisplayTooltipIndexRoute,
     ComponentsDisplayTypographyIndexRoute:
       ComponentsDisplayTypographyIndexRoute,
   }
@@ -373,10 +583,30 @@ const ComponentsFormsRouteRouteChildren: ComponentsFormsRouteRouteChildren = {
 const ComponentsFormsRouteRouteWithChildren =
   ComponentsFormsRouteRoute._addFileChildren(ComponentsFormsRouteRouteChildren)
 
+interface ComponentsLayoutRouteRouteChildren {
+  ComponentsLayoutColIndexRoute: typeof ComponentsLayoutColIndexRoute
+  ComponentsLayoutFlexIndexRoute: typeof ComponentsLayoutFlexIndexRoute
+  ComponentsLayoutGridIndexRoute: typeof ComponentsLayoutGridIndexRoute
+  ComponentsLayoutRowIndexRoute: typeof ComponentsLayoutRowIndexRoute
+}
+
+const ComponentsLayoutRouteRouteChildren: ComponentsLayoutRouteRouteChildren = {
+  ComponentsLayoutColIndexRoute: ComponentsLayoutColIndexRoute,
+  ComponentsLayoutFlexIndexRoute: ComponentsLayoutFlexIndexRoute,
+  ComponentsLayoutGridIndexRoute: ComponentsLayoutGridIndexRoute,
+  ComponentsLayoutRowIndexRoute: ComponentsLayoutRowIndexRoute,
+}
+
+const ComponentsLayoutRouteRouteWithChildren =
+  ComponentsLayoutRouteRoute._addFileChildren(
+    ComponentsLayoutRouteRouteChildren,
+  )
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ComponentsDisplayRouteRoute: ComponentsDisplayRouteRouteWithChildren,
   ComponentsFormsRouteRoute: ComponentsFormsRouteRouteWithChildren,
+  ComponentsLayoutRouteRoute: ComponentsLayoutRouteRouteWithChildren,
   LoginIndexRoute: LoginIndexRoute,
   ComponentsThemeToggleIndexRoute: ComponentsThemeToggleIndexRoute,
   HooksUseMediaQueryIndexRoute: HooksUseMediaQueryIndexRoute,

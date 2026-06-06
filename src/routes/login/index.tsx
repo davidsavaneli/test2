@@ -1,7 +1,16 @@
 import { useState } from 'react'
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router'
 import { z } from 'zod'
-import { Button, Checkbox, Form, TextField, Typography } from 'sava-test/components'
+import {
+  Button,
+  Checkbox,
+  Col,
+  Flex,
+  Form,
+  PageLayout,
+  TextField,
+  Typography,
+} from 'sava-test/components'
 import { useForm } from 'sava-test/hooks'
 import { auth } from '../../auth'
 
@@ -36,28 +45,27 @@ function LoginPage() {
   })
 
   return (
-    <div className="login-screen">
-      <div className="card login-card">
+    <Flex align="center" justify="center" padding="xl" style={{ minHeight: '100vh' }}>
+      <PageLayout style={{ width: '100%', maxWidth: 360 }}>
         <Typography variant="h3" align="center">
           Sign In
         </Typography>
-        <Form
-          form={form}
-          style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 20 }}
-        >
-          <TextField name="login" label="Username or Email" placeholder="you@example.com" />
-          <TextField name="password" type="password" label="Password" placeholder="••••••••" />
-          <Checkbox name="keep" label="Keep Me Signed In" />
-          {failed ? (
-            <Typography variant="bodySmall" color="error">
-              Invalid username or password
-            </Typography>
-          ) : null}
-          <Button type="submit" fullWidth loading={form.isSubmitting}>
-            Sign In
-          </Button>
+        <Form form={form}>
+          <Col gap="md" style={{ marginTop: 20 }}>
+            <TextField name="login" label="Username or Email" placeholder="you@example.com" />
+            <TextField name="password" type="password" label="Password" placeholder="••••••••" />
+            <Checkbox name="keep" label="Keep Me Signed In" />
+            {failed ? (
+              <Typography variant="bodySmall" color="error">
+                Invalid username or password
+              </Typography>
+            ) : null}
+            <Button type="submit" fullWidth loading={form.isSubmitting}>
+              Sign In
+            </Button>
+          </Col>
         </Form>
-      </div>
-    </div>
+      </PageLayout>
+    </Flex>
   )
 }

@@ -1,6 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
-import { Button, Checkbox, Form, NumberField, TextField } from 'sava-test/components'
+import {
+  Button,
+  Checkbox,
+  Col,
+  Form,
+  NumberField,
+  PageLayout,
+  TextField,
+} from 'sava-test/components'
 import { useForm } from 'sava-test/hooks'
 
 // Index route for /components/forms — the group's own page (a validation form).
@@ -30,15 +38,17 @@ function FormsPage() {
   })
 
   return (
-    <div className="card demo-col">
-      <Form form={form} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-        <TextField name="email" label="Email" placeholder="you@example.com" />
-        <NumberField name="age" label="Age" min={0} max={120} />
-        <Checkbox name="agree" label="I Accept The Terms" />
-        <Button type="submit" loading={form.isSubmitting}>
-          Submit
-        </Button>
+    <PageLayout>
+      <Form form={form}>
+        <Col gap="md" style={{ maxWidth: 420 }}>
+          <TextField name="email" label="Email" placeholder="you@example.com" />
+          <NumberField name="age" label="Age" min={0} max={120} />
+          <Checkbox name="agree" label="I Accept The Terms" />
+          <Button type="submit" loading={form.isSubmitting}>
+            Submit
+          </Button>
+        </Col>
       </Form>
-    </div>
+    </PageLayout>
   )
 }

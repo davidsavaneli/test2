@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Typography } from 'sava-test/components'
+import { Col, PageLayout, Typography } from 'sava-test/components'
 import { useMediaQuery } from '../../../hooks/useMediaQuery'
 
 export const Route = createFileRoute('/hooks/use-media-query/')({
@@ -12,16 +12,18 @@ function UseMediaQueryPage() {
   const prefersDark = useMediaQuery('(prefers-color-scheme: dark)')
 
   return (
-    <div className="card demo-stack">
-      <Typography variant="body">
-        <strong>(min-width: 1024px)</strong> → {isWide ? 'matches ✓' : 'no match — narrow'}
-      </Typography>
-      <Typography variant="body">
-        <strong>(prefers-color-scheme: dark)</strong> → {prefersDark ? 'matches ✓' : 'no match'}
-      </Typography>
-      <Typography variant="bodySmall" color="tertiary">
-        Resize the window past 1024px to watch the first row flip live.
-      </Typography>
-    </div>
+    <PageLayout>
+      <Col gap="lg">
+        <Typography variant="body">
+          <strong>(min-width: 1024px)</strong> → {isWide ? 'matches ✓' : 'no match — narrow'}
+        </Typography>
+        <Typography variant="body">
+          <strong>(prefers-color-scheme: dark)</strong> → {prefersDark ? 'matches ✓' : 'no match'}
+        </Typography>
+        <Typography variant="bodySmall" color="tertiary">
+          Resize the window past 1024px to watch the first row flip live.
+        </Typography>
+      </Col>
+    </PageLayout>
   )
 }

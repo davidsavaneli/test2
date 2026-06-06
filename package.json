@@ -15,7 +15,7 @@
     "@tanstack/react-router": "^1.170.11",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "sava-test": "^0.0.5",
+    "sava-test": "^0.0.6",
     "zod": "^4.4.3"
   },
   "devDependencies": {

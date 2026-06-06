@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Icon, TextField } from 'sava-test/components'
+import { Col, Icon, PageLayout, TextField } from 'sava-test/components'
 
 export const Route = createFileRoute('/components/forms/text-field/')({
   staticData: { name: 'Text Field', order: 2 },
@@ -8,29 +8,31 @@ export const Route = createFileRoute('/components/forms/text-field/')({
 
 function TextFieldPage() {
   return (
-    <div className="card demo-col">
-      <TextField label="Label" placeholder="Type here" />
-      <TextField
-        label="With Prefix"
-        adornment="https://"
-        adornmentPosition="left"
-        placeholder="example.com"
-      />
-      <TextField
-        label="With Icon"
-        adornment={<Icon name="SearchNormal" />}
-        adornmentPosition="left"
-        placeholder="Search"
-      />
-      <TextField label="Phone Mask" mask="(999) 999-9999" placeholder="(555) 123-4567" />
-      <TextField label="Password" type="password" placeholder="Secret" />
-      <TextField
-        label="Error"
-        error
-        helperText="This field is required"
-        defaultValue="Wrong value"
-      />
-      <TextField label="Disabled" disabled placeholder="Disabled" />
-    </div>
+    <PageLayout>
+      <Col gap="md" style={{ maxWidth: 420 }}>
+        <TextField label="Label" placeholder="Type here" />
+        <TextField
+          label="With Prefix"
+          adornment="https://"
+          adornmentPosition="left"
+          placeholder="example.com"
+        />
+        <TextField
+          label="With Icon"
+          adornment={<Icon name="SearchNormal" />}
+          adornmentPosition="left"
+          placeholder="Search"
+        />
+        <TextField label="Phone Mask" mask="(999) 999-9999" placeholder="(555) 123-4567" />
+        <TextField label="Password" type="password" placeholder="Secret" />
+        <TextField
+          label="Error"
+          error
+          helperText="This field is required"
+          defaultValue="Wrong value"
+        />
+        <TextField label="Disabled" disabled placeholder="Disabled" />
+      </Col>
+    </PageLayout>
   )
 }

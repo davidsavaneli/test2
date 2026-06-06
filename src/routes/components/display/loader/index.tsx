@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Loader } from 'sava-test/components'
+import { Col, Loader, PageLayout, Row } from 'sava-test/components'
 
 export const Route = createFileRoute('/components/display/loader/')({
   staticData: { name: 'Loader', order: 2 },
@@ -8,18 +8,20 @@ export const Route = createFileRoute('/components/display/loader/')({
 
 function LoaderPage() {
   return (
-    <div className="card demo-stack">
-      <div className="demo-row">
-        <Loader size="sm" />
-        <Loader size="md" />
-        <Loader size="lg" />
-      </div>
-      <div className="demo-row">
-        <Loader color="primary" size="lg" />
-        <Loader color="success" size="lg" />
-        <Loader color="error" size="lg" />
-        <Loader color="warning" size="lg" />
-      </div>
-    </div>
+    <PageLayout>
+      <Col gap="lg">
+        <Row gap="md" wrap>
+          <Loader size="sm" />
+          <Loader size="md" />
+          <Loader size="lg" />
+        </Row>
+        <Row gap="md" wrap>
+          <Loader color="primary" size="lg" />
+          <Loader color="success" size="lg" />
+          <Loader color="error" size="lg" />
+          <Loader color="warning" size="lg" />
+        </Row>
+      </Col>
+    </PageLayout>
   )
 }
