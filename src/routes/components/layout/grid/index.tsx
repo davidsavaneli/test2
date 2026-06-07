@@ -12,7 +12,7 @@ function GridPage() {
   return (
     <PageLayout>
       <Col gap="lg">
-        <Typography variant="bodySmall" color="tertiary">
+        <Typography variant="bodySmall" color="muted">
           cols={'{3}'} — fixed columns
         </Typography>
         <Grid cols={3} gap="md">
@@ -20,7 +20,7 @@ function GridPage() {
             <Chip key={t}>Item {t}</Chip>
           ))}
         </Grid>
-        <Typography variant="bodySmall" color="tertiary">
+        <Typography variant="bodySmall" color="muted">
           minItemWidth={'{160}'} — responsive auto-fit
         </Typography>
         <Grid minItemWidth={160} gap="md">

@@ -21,7 +21,7 @@ function AvatarPage() {
           <Avatar name="DS" size="md" />
           <Avatar name="DS" size="lg" />
         </Row>
-        <Typography variant="bodySmall" color="tertiary">
+        <Typography variant="bodySmall" color="muted">
           AvatarGroup (max 3)
         </Typography>
         <AvatarGroup max={3}>

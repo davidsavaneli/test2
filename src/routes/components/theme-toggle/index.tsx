@@ -14,7 +14,7 @@ function ThemeTogglePage() {
         <ThemeToggle variant="filled" />
         <ThemeToggle variant="outlined" />
         <ThemeToggle variant="text" />
-        <Typography variant="body" color="tertiary">
+        <Typography variant="body" color="muted">
           Click any toggle — the whole panel switches theme.
         </Typography>
       </Row>

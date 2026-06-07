@@ -12,7 +12,7 @@ function FlexPage() {
   return (
     <PageLayout>
       <Col gap="lg">
-        <Typography variant="bodySmall" color="tertiary">
+        <Typography variant="bodySmall" color="muted">
           direction="row" (default) · gap · wrap
         </Typography>
         <Flex gap="sm" wrap>
@@ -20,14 +20,14 @@ function FlexPage() {
             <Chip key={t}>{t}</Chip>
           ))}
         </Flex>
-        <Typography variant="bodySmall" color="tertiary">
+        <Typography variant="bodySmall" color="muted">
           justify="between"
         </Typography>
         <Flex gap="sm" justify="between">
           <Chip>Start</Chip>
           <Chip>End</Chip>
         </Flex>
-        <Typography variant="bodySmall" color="tertiary">
+        <Typography variant="bodySmall" color="muted">
           direction="column"
         </Typography>
         <Flex direction="column" gap="sm">

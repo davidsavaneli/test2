@@ -22,7 +22,7 @@ one import):
 | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | `sava-test/components`                                | every UI component — `Button`, `TextField`, …, `Form`, `RootLayout`, `Sidebar`, `Breadcrumbs`, `FirstRouteRedirect` |
 | `sava-test/components/<Name>`                         | a single component, e.g. `import Button from 'sava-test/components/Button'` (default **or** named)                  |
-| `sava-test/hooks`                                     | `useForm`, `useDisclosure`, `useAccessKeys`                                                                         |
+| `sava-test/hooks`                                     | `useForm`, `useDisclosure`, `useLockBodyScroll`, `useAccessKeys`                                                    |
 | `sava-test/theme`                                     | `ThemeProvider`, `useTheme`, `applyTheme` + theme types                                                             |
 | `sava-test/icons`                                     | `Icon`, `IconName`, `ICON_NAMES`, the raw `icons` registry                                                          |
 | `sava-test/helpers`                                   | `setAccessKeys`, `getAccessKeys`, `hasAccess` (RBAC)                                                                |
@@ -54,26 +54,18 @@ import 'sava-test/css/reset.css' // global reset
 import 'sava-test/css/styles.css' // design tokens + base styles
 import { ThemeProvider } from 'sava-test/theme'
 
+// The library ships a complete Techzy theme (light + dark). Override any subset — or omit `config`
+// entirely to use the defaults.
 const theme = {
   mode: 'light' as const,
   colors: {
-    light: {
-      primary: '#13404e',
-      secondary: '#f4f9f8',
-      tertiary: '#5c7687',
-      dark: '#056472',
-      medium: '#039aa1',
-      light: '#adc3c9',
-      success: '#00a854',
-      error: '#f04134',
-      info: '#039aa1',
-      warning: '#ffbf00',
-    },
-    dark: { secondary: '#04202b' }, // partial dark overrides; the lib fills sensible dark defaults
+    light: { primary: '#13404e', secondary: '#f4f9f8' }, // override any subset; the rest use defaults
+    dark: { secondary: '#04202b' }, // partial dark overrides; the lib fills the rest
   },
 }
 
 createRoot(el).render(
+  // …or simply <ThemeProvider><App /></ThemeProvider> for the built-in theme
   <ThemeProvider config={theme}>
     <App />
   </ThemeProvider>,
@@ -82,11 +74,17 @@ createRoot(el).render(
 
 ## 3. Theming
 
-- **10 brand colors** (`TechzyColor`): `primary secondary tertiary dark medium light success error info warning`.
-- `ThemeConfig`: `{ colors: { light: TechzyTheme; dark?: Partial<TechzyTheme> }; mode?: 'light' | 'dark' }`.
-  Dark mode merges: app's light palette → library dark defaults → your `dark` overrides.
+- **10 brand colors** (`ThemeColor`): `primary secondary background dark medium light success error info warning`.
+- `background` is the **page canvas** (body, shell, sidebar, header, `PageLayout`); the elevated
+  surfaces on top of it (cards, inputs, dropdowns) use `secondary`. Defaults to white in light mode
+  and a deep dark in dark mode; override it per mode like any color.
+- **Built-in defaults live in the library** (`DEFAULT_LIGHT_COLORS` + `DEFAULT_DARK_COLORS`), so the
+  theme works with **no config**. `ThemeConfig` is all-optional:
+  `{ colors?: { light?: Partial<ThemePalette>; dark?: Partial<ThemePalette> }; mode?: 'light' | 'dark' }`
+  — pass only the colors you want to change.
+- Merge order: light = `defaults → your light`; dark = `merged light → library dark defaults → your dark`.
 - `useTheme()` → `{ mode, setMode, toggleMode }` (must be inside `ThemeProvider`).
-- `<ThemeToggle />` — a ready-made light/dark switch button.
+- `<ThemeToggle />` / `<FullscreenToggle />` — ready-made light/dark and browser-fullscreen switch buttons.
 - **Always pass a color by token name** via the `color` prop (`color="error"`); never hardcode hex.
 - Sizes everywhere are `sm | md | lg` (default `md`).
 
@@ -105,7 +103,7 @@ Inherits text color unless `color` is set.
 **Loader** — circular spinner. `size` (16/20/24) · `color?`. Inherits text color.
 
 **Typography** — `variant` (`h1 h2 h3 h4 subtitle body bodySmall caption uppercase`, default `body`) ·
-`as?` (override the tag) · `color?: TechzyColor | 'text'` · `align` · `truncate`. Headings are bold.
+`as?` (override the tag) · `color?: ThemeColor | 'text' | 'muted'` · `align` · `truncate`. Headings are bold.
 
 **TextField** — labeled text input. `label` · `size` · `error` + `helperText` (red state) · `required` ·
 `fullWidth` (**default true**) · `disabled` · `adornment` + `adornmentPosition` (`left`/`right`) — a
@@ -123,10 +121,23 @@ auto-adds a show/hide toggle. Controlled (`value`+`onChange`) or uncontrolled (`
 
 **ThemeToggle** — wraps `IconButton`; flips the theme mode. Pass-through `variant`/`color`/`size`.
 
+**FullscreenToggle** — wraps `IconButton`; toggles the browser **Fullscreen API** (maximize / exit)
+and flips its icon 180° to match. Auto-hides where the API is unavailable (e.g. iPhone). Same
+pass-through props as `ThemeToggle`.
+
 **Badge** — wraps a child (e.g. a `Button`/`IconButton`) and pins a count or dot to its corner:
 `<Badge content={2}><IconButton …/></Badge>`. `content` (`number | string`) → a count (numbers cap to
 `${max}+`, `max` default 99; a `0` hides unless `showZero`); `dot` → a plain indicator. `color`
-(default `dark`), `placement` (`top-right` default · `top-left` · `bottom-right` · `bottom-left`).
+(default `medium`), `placement` (`top-right` default · `top-left` · `bottom-right` · `bottom-left`).
+
+**Card** — a surface card. `title` (clamps to two lines, then ellipsis) · `subtitle` (muted line under
+the title) · `icon` (`IconName`/node, shown in a filled icon box) · `color` (tints the icon box,
+default `medium`) · `actions` (header, right) ·
+`footer` (bottom actions, right) · `footerStart` (bottom actions, left) · `children` (body) ·
+`collapsible` (chevron folds the body+footer smoothly;
+header actions hide while collapsed) · `collapsed`/`defaultCollapsed`/`onCollapsedChange`. A subtle
+divider separates the header from the body while expanded.
+`<Card icon="Setting2" title="Settings" color="success" collapsible footer={<Button>Save</Button>}>…</Card>`.
 
 **Tooltip** — wraps a single element and shows a floating label on hover/focus:
 `<Tooltip content="Save"><IconButton …/></Tooltip>`. `content: ReactNode`, `placement`
@@ -146,6 +157,22 @@ a title for a labeled divider with `align` (`left` · `center` default · `right
 `size` · `clickable` (interactive; off by default) · `disabled` · `startIcon` **or** `avatar` ·
 `onDelete` (adds a delete ✕). `<Chip avatar={<Avatar name="David Savaneli" />} onDelete={remove}>David</Chip>`.
 
+**List / ListItem** — a reusable row + its container. **`ListItem`**: `icon` (`IconName`/node) · label
+(`children`) · `description` (muted second line) · `trailing` (right slot) · `selected` · `clickable`
+(hover + keyboard) · `disabled` · `size` (`sm`/`md`/`lg`) · `color` (selected tint) · `as` (`'a'`/
+`'button'`/router `Link`; anchor `href`/`target`/`rel` typed). **`List`**: a vertical stack with `gap`
+(default `2px`) / `padding` / `role` (default `list`; set `"menu"` for a dropdown) / `size` (a default
+for all its items). Standalone, in a dropdown panel, or in the sidebar.
+`<List role="menu"><ListItem icon="Setting2" clickable selected>Settings</ListItem></List>`.
+
+**Dropdown** — a floating menu anchored to a `trigger`, with `ListItem`s as children. `placement`
+(`bottom-start` default · `bottom-end` · `top-start` · `top-end`) — auto-**flips** and stays on-screen,
+and re-positions on scroll/resize (a tall menu caps its height + scrolls). Opens on click; closes on
+outside click, `Escape`, or selecting an item (`closeOnSelect`, default true); locks page scroll while
+open. `size` (`sm`/`md`/`lg`) sets the panel min-width (150 / 190 / 220) + item density. Also: `open` /
+`defaultOpen` / `onOpenChange` · `matchTriggerWidth` (select-like) · `disabled` · `offset`.
+`<Dropdown trigger={<Button>Menu</Button>}><ListItem icon="User" clickable>Profile</ListItem></Dropdown>`.
+
 **Row / Col / Flex** — flexbox layout via props (no inline `style`). `gap` · `align` · `justify` ·
 `wrap` · `padding` · `grow` · `inline`. `gap`/`padding` accept a token key (`"md"`), a px number, or any
 CSS string. `Row` = centered horizontal, `Col` = vertical, `Flex` = the general one (`direction`).
@@ -155,7 +182,8 @@ CSS string. `Row` = centered horizontal, `Col` = vertical, `Flex` = the general 
 wraps to one when narrow), plus `gap`/`align`/`padding`. Great for forms side-by-side:
 `<Grid minItemWidth={220} gap={16}><TextField …/><TextField …/></Grid>`.
 
-**Hooks** — `useDisclosure(initial?)` → `{ isOpen, open, close, toggle }`.
+**Hooks** — `useDisclosure(initial?)` → `{ isOpen, open, close, toggle }` · `useLockBodyScroll(locked)`
+(freeze page scroll while `locked` — for menus/modals/drawers).
 
 ## 5. Forms (Zod-powered) — the easy way
 
@@ -227,24 +255,29 @@ peer: `npm i @tanstack/react-router` (>=1).
 - **`RootLayout`** — `logo?`, `header?`, `children`. Set it as the **root route's** component and pass
   `<Outlet/>`. Renders sidebar + header + content. `logo` is any node shown atop the sidebar (an
   `<img>`, an `<Icon>`, …). The **header** holds only right-side controls via
-  `header?: { theme?: boolean; onLogout?: () => void }` — `theme` (default `true`) shows the
-  `ThemeToggle`; passing `onLogout` adds a logout button. The content area auto-stacks
+  `header?: { theme?: boolean; fullscreen?: boolean; onLogout?: () => void; user?: { name?; email?; avatar? } }`
+  — `theme` and `fullscreen` (both default `true`) show the `ThemeToggle` and `FullscreenToggle`;
+  `onLogout` adds an account avatar whose menu has a **Sign
+  out** item (calls `onLogout`); `user` adds a name+email header in that menu (avatar = a user icon, or `user.avatar` image). The content area auto-stacks
   **`Breadcrumbs` → the page title (the active route's `staticData.name`, as an `h2`) → your page**.
-- **`PageLayout`** — the surface-card container your page body sits in (border + radius + padding).
+- **`PageLayout`** — the container your page body sits in (border + radius + padding); uses the page `background`, so cards/inputs inside read as elevated.
   Wrap each route's content: `<PageLayout>…</PageLayout>`. Extends `HTMLAttributes<HTMLDivElement>`,
   exported named **and** default from `sava-test/components` (and `sava-test/components/PageLayout`).
 - **`Sidebar`** — auto-builds the menu from the routes' `staticData` (rendered inside `RootLayout`;
   you don't place it yourself).
 - **`Breadcrumbs`** — auto-rendered above the page title. Starts with a home icon (links to the first
   allowed page) + a crumb per matched route with a `staticData.name`; the current page is plain text.
-  `separator?: IconName | ReactNode` (default `"/"`) — an `IconName` like `"ArrowRight4"` renders as an
-  icon. Also exported from `sava-test/components` if you want to place it yourself.
+  `separator?: IconName | ReactNode` (default `"ArrowRight4"`) — an `IconName` renders as an icon, any
+  other string as text. Also exported from `sava-test/components` if you want to place it yourself.
 - **`FirstRouteRedirect`** — use as the `/` route's component; forwards to the first menu item.
 - Each route self-registers via **`staticData`** (typed once you import from the package):
   `{ name?: string; icon?: IconName; order?: number; hidden?: boolean; roles?: string[] }`. No `name`
   → not in the menu. Segments infer structure: `/dashboard` → top link; `/components/forms/button` →
   module → group → page; an index route at a group path makes the group its own page. Module/group
   label+icon come from that folder's `route.tsx` `staticData`.
+- **Dynamic / detail routes** (e.g. `/news/$newsId`) just work: leave them without a `name` (or set
+  `hidden`) and they render normally but never appear in the sidebar; the page title + breadcrumb fall
+  back to the nearest named ancestor (render your own heading in the page for a dynamic title).
 
 ### Role-based access (RBAC)
 
@@ -324,6 +357,43 @@ export const Route = createFileRoute('/dashboard/')({
 })
 // group chrome lives in the group's route.tsx:
 //   createFileRoute('/components/forms')({ staticData: { name: 'Forms', icon: 'DocumentText', order: 0 } })
+```
+
+### Dynamic / CRUD pages (list → new → detail → edit)
+
+Just add files — the list carries `staticData.name` (so it's in the menu); `new` / `$id` / `edit`
+carry **no `name`**, so they route + render but stay off the sidebar. With file-based routing
+`Link`/`navigate`/`useParams` are fully typed — no casts.
+
+```
+src/routes/users/
+  index.tsx            →  /users               (list)   ← staticData.name "Users" → in the sidebar
+  new.tsx              →  /users/new           (add)    ← no name → off the sidebar
+  $userId/
+    index.tsx          →  /users/$userId       (detail) ← no name → off the sidebar
+    edit.tsx           →  /users/$userId/edit  (edit)   ← no name → off the sidebar
+```
+
+```tsx
+// users/index.tsx — the only one with a name
+export const Route = createFileRoute('/users/')({
+  staticData: { name: 'Users', icon: 'People', order: 2 },
+  component: () => (
+    <PageLayout>
+      …list with <Link to="/users/$userId" params={{ userId }} />…
+    </PageLayout>
+  ),
+})
+
+// users/$userId/index.tsx — dynamic detail; no `name`
+export const Route = createFileRoute('/users/$userId/')({ component: UserDetail })
+function UserDetail() {
+  const { userId } = Route.useParams() // typed, no cast
+  return <PageLayout>…</PageLayout>
+}
+
+// users/new.tsx + users/$userId/edit.tsx — one form, add vs. edit by presence of the param.
+// breadcrumb + page title on these dynamic pages fall back to the nearest named ancestor ("Users").
 ```
 
 > Gotcha: never name a leaf route file `loader.tsx` (reserved by the TanStack Router plugin) — use a

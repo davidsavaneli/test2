@@ -18,21 +18,6 @@ declare module '@tanstack/react-router' {
 
 const theme = {
   mode: 'light' as const,
-  colors: {
-    light: {
-      primary: '#13404e',
-      secondary: '#f4f9f8',
-      tertiary: '#5c7687',
-      dark: '#056472',
-      medium: '#039aa1',
-      light: '#adc3c9',
-      success: '#00a854',
-      error: '#f04134',
-      info: '#039aa1',
-      warning: '#ffbf00',
-    },
-    dark: { secondary: '#04202b' },
-  },
 }
 
 auth.restore() // re-publish stored roles before the router mounts

@@ -29,9 +29,13 @@ import { Route as ComponentsFormsButtonIndexRouteImport } from './routes/compone
 import { Route as ComponentsDisplayTypographyIndexRouteImport } from './routes/components/display/typography/index'
 import { Route as ComponentsDisplayTooltipIndexRouteImport } from './routes/components/display/tooltip/index'
 import { Route as ComponentsDisplayLoaderIndexRouteImport } from './routes/components/display/loader/index'
+import { Route as ComponentsDisplayListIndexRouteImport } from './routes/components/display/list/index'
 import { Route as ComponentsDisplayIconIndexRouteImport } from './routes/components/display/icon/index'
+import { Route as ComponentsDisplayFullscreenToggleIndexRouteImport } from './routes/components/display/fullscreen-toggle/index'
+import { Route as ComponentsDisplayDropdownIndexRouteImport } from './routes/components/display/dropdown/index'
 import { Route as ComponentsDisplayDividerIndexRouteImport } from './routes/components/display/divider/index'
 import { Route as ComponentsDisplayChipIndexRouteImport } from './routes/components/display/chip/index'
+import { Route as ComponentsDisplayCardIndexRouteImport } from './routes/components/display/card/index'
 import { Route as ComponentsDisplayBadgeIndexRouteImport } from './routes/components/display/badge/index'
 import { Route as ComponentsDisplayAvatarIndexRouteImport } from './routes/components/display/avatar/index'
 
@@ -148,10 +152,28 @@ const ComponentsDisplayLoaderIndexRoute =
     path: '/loader/',
     getParentRoute: () => ComponentsDisplayRouteRoute,
   } as any)
+const ComponentsDisplayListIndexRoute =
+  ComponentsDisplayListIndexRouteImport.update({
+    id: '/list/',
+    path: '/list/',
+    getParentRoute: () => ComponentsDisplayRouteRoute,
+  } as any)
 const ComponentsDisplayIconIndexRoute =
   ComponentsDisplayIconIndexRouteImport.update({
     id: '/icon/',
     path: '/icon/',
+    getParentRoute: () => ComponentsDisplayRouteRoute,
+  } as any)
+const ComponentsDisplayFullscreenToggleIndexRoute =
+  ComponentsDisplayFullscreenToggleIndexRouteImport.update({
+    id: '/fullscreen-toggle/',
+    path: '/fullscreen-toggle/',
+    getParentRoute: () => ComponentsDisplayRouteRoute,
+  } as any)
+const ComponentsDisplayDropdownIndexRoute =
+  ComponentsDisplayDropdownIndexRouteImport.update({
+    id: '/dropdown/',
+    path: '/dropdown/',
     getParentRoute: () => ComponentsDisplayRouteRoute,
   } as any)
 const ComponentsDisplayDividerIndexRoute =
@@ -164,6 +186,12 @@ const ComponentsDisplayChipIndexRoute =
   ComponentsDisplayChipIndexRouteImport.update({
     id: '/chip/',
     path: '/chip/',
+    getParentRoute: () => ComponentsDisplayRouteRoute,
+  } as any)
+const ComponentsDisplayCardIndexRoute =
+  ComponentsDisplayCardIndexRouteImport.update({
+    id: '/card/',
+    path: '/card/',
     getParentRoute: () => ComponentsDisplayRouteRoute,
   } as any)
 const ComponentsDisplayBadgeIndexRoute =
@@ -190,9 +218,13 @@ export interface FileRoutesByFullPath {
   '/hooks/use-media-query/': typeof HooksUseMediaQueryIndexRoute
   '/components/display/avatar/': typeof ComponentsDisplayAvatarIndexRoute
   '/components/display/badge/': typeof ComponentsDisplayBadgeIndexRoute
+  '/components/display/card/': typeof ComponentsDisplayCardIndexRoute
   '/components/display/chip/': typeof ComponentsDisplayChipIndexRoute
   '/components/display/divider/': typeof ComponentsDisplayDividerIndexRoute
+  '/components/display/dropdown/': typeof ComponentsDisplayDropdownIndexRoute
+  '/components/display/fullscreen-toggle/': typeof ComponentsDisplayFullscreenToggleIndexRoute
   '/components/display/icon/': typeof ComponentsDisplayIconIndexRoute
+  '/components/display/list/': typeof ComponentsDisplayListIndexRoute
   '/components/display/loader/': typeof ComponentsDisplayLoaderIndexRoute
   '/components/display/tooltip/': typeof ComponentsDisplayTooltipIndexRoute
   '/components/display/typography/': typeof ComponentsDisplayTypographyIndexRoute
@@ -216,9 +248,13 @@ export interface FileRoutesByTo {
   '/hooks/use-media-query': typeof HooksUseMediaQueryIndexRoute
   '/components/display/avatar': typeof ComponentsDisplayAvatarIndexRoute
   '/components/display/badge': typeof ComponentsDisplayBadgeIndexRoute
+  '/components/display/card': typeof ComponentsDisplayCardIndexRoute
   '/components/display/chip': typeof ComponentsDisplayChipIndexRoute
   '/components/display/divider': typeof ComponentsDisplayDividerIndexRoute
+  '/components/display/dropdown': typeof ComponentsDisplayDropdownIndexRoute
+  '/components/display/fullscreen-toggle': typeof ComponentsDisplayFullscreenToggleIndexRoute
   '/components/display/icon': typeof ComponentsDisplayIconIndexRoute
+  '/components/display/list': typeof ComponentsDisplayListIndexRoute
   '/components/display/loader': typeof ComponentsDisplayLoaderIndexRoute
   '/components/display/tooltip': typeof ComponentsDisplayTooltipIndexRoute
   '/components/display/typography': typeof ComponentsDisplayTypographyIndexRoute
@@ -244,9 +280,13 @@ export interface FileRoutesById {
   '/hooks/use-media-query/': typeof HooksUseMediaQueryIndexRoute
   '/components/display/avatar/': typeof ComponentsDisplayAvatarIndexRoute
   '/components/display/badge/': typeof ComponentsDisplayBadgeIndexRoute
+  '/components/display/card/': typeof ComponentsDisplayCardIndexRoute
   '/components/display/chip/': typeof ComponentsDisplayChipIndexRoute
   '/components/display/divider/': typeof ComponentsDisplayDividerIndexRoute
+  '/components/display/dropdown/': typeof ComponentsDisplayDropdownIndexRoute
+  '/components/display/fullscreen-toggle/': typeof ComponentsDisplayFullscreenToggleIndexRoute
   '/components/display/icon/': typeof ComponentsDisplayIconIndexRoute
+  '/components/display/list/': typeof ComponentsDisplayListIndexRoute
   '/components/display/loader/': typeof ComponentsDisplayLoaderIndexRoute
   '/components/display/tooltip/': typeof ComponentsDisplayTooltipIndexRoute
   '/components/display/typography/': typeof ComponentsDisplayTypographyIndexRoute
@@ -273,9 +313,13 @@ export interface FileRouteTypes {
     | '/hooks/use-media-query/'
     | '/components/display/avatar/'
     | '/components/display/badge/'
+    | '/components/display/card/'
     | '/components/display/chip/'
     | '/components/display/divider/'
+    | '/components/display/dropdown/'
+    | '/components/display/fullscreen-toggle/'
     | '/components/display/icon/'
+    | '/components/display/list/'
     | '/components/display/loader/'
     | '/components/display/tooltip/'
     | '/components/display/typography/'
@@ -299,9 +343,13 @@ export interface FileRouteTypes {
     | '/hooks/use-media-query'
     | '/components/display/avatar'
     | '/components/display/badge'
+    | '/components/display/card'
     | '/components/display/chip'
     | '/components/display/divider'
+    | '/components/display/dropdown'
+    | '/components/display/fullscreen-toggle'
     | '/components/display/icon'
+    | '/components/display/list'
     | '/components/display/loader'
     | '/components/display/tooltip'
     | '/components/display/typography'
@@ -326,9 +374,13 @@ export interface FileRouteTypes {
     | '/hooks/use-media-query/'
     | '/components/display/avatar/'
     | '/components/display/badge/'
+    | '/components/display/card/'
     | '/components/display/chip/'
     | '/components/display/divider/'
+    | '/components/display/dropdown/'
+    | '/components/display/fullscreen-toggle/'
     | '/components/display/icon/'
+    | '/components/display/list/'
     | '/components/display/loader/'
     | '/components/display/tooltip/'
     | '/components/display/typography/'
@@ -495,11 +547,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsDisplayLoaderIndexRouteImport
       parentRoute: typeof ComponentsDisplayRouteRoute
     }
+    '/components/display/list/': {
+      id: '/components/display/list/'
+      path: '/list'
+      fullPath: '/components/display/list/'
+      preLoaderRoute: typeof ComponentsDisplayListIndexRouteImport
+      parentRoute: typeof ComponentsDisplayRouteRoute
+    }
     '/components/display/icon/': {
       id: '/components/display/icon/'
       path: '/icon'
       fullPath: '/components/display/icon/'
       preLoaderRoute: typeof ComponentsDisplayIconIndexRouteImport
+      parentRoute: typeof ComponentsDisplayRouteRoute
+    }
+    '/components/display/fullscreen-toggle/': {
+      id: '/components/display/fullscreen-toggle/'
+      path: '/fullscreen-toggle'
+      fullPath: '/components/display/fullscreen-toggle/'
+      preLoaderRoute: typeof ComponentsDisplayFullscreenToggleIndexRouteImport
+      parentRoute: typeof ComponentsDisplayRouteRoute
+    }
+    '/components/display/dropdown/': {
+      id: '/components/display/dropdown/'
+      path: '/dropdown'
+      fullPath: '/components/display/dropdown/'
+      preLoaderRoute: typeof ComponentsDisplayDropdownIndexRouteImport
       parentRoute: typeof ComponentsDisplayRouteRoute
     }
     '/components/display/divider/': {
@@ -514,6 +587,13 @@ declare module '@tanstack/react-router' {
       path: '/chip'
       fullPath: '/components/display/chip/'
       preLoaderRoute: typeof ComponentsDisplayChipIndexRouteImport
+      parentRoute: typeof ComponentsDisplayRouteRoute
+    }
+    '/components/display/card/': {
+      id: '/components/display/card/'
+      path: '/card'
+      fullPath: '/components/display/card/'
+      preLoaderRoute: typeof ComponentsDisplayCardIndexRouteImport
       parentRoute: typeof ComponentsDisplayRouteRoute
     }
     '/components/display/badge/': {
@@ -536,9 +616,13 @@ declare module '@tanstack/react-router' {
 interface ComponentsDisplayRouteRouteChildren {
   ComponentsDisplayAvatarIndexRoute: typeof ComponentsDisplayAvatarIndexRoute
   ComponentsDisplayBadgeIndexRoute: typeof ComponentsDisplayBadgeIndexRoute
+  ComponentsDisplayCardIndexRoute: typeof ComponentsDisplayCardIndexRoute
   ComponentsDisplayChipIndexRoute: typeof ComponentsDisplayChipIndexRoute
   ComponentsDisplayDividerIndexRoute: typeof ComponentsDisplayDividerIndexRoute
+  ComponentsDisplayDropdownIndexRoute: typeof ComponentsDisplayDropdownIndexRoute
+  ComponentsDisplayFullscreenToggleIndexRoute: typeof ComponentsDisplayFullscreenToggleIndexRoute
   ComponentsDisplayIconIndexRoute: typeof ComponentsDisplayIconIndexRoute
+  ComponentsDisplayListIndexRoute: typeof ComponentsDisplayListIndexRoute
   ComponentsDisplayLoaderIndexRoute: typeof ComponentsDisplayLoaderIndexRoute
   ComponentsDisplayTooltipIndexRoute: typeof ComponentsDisplayTooltipIndexRoute
   ComponentsDisplayTypographyIndexRoute: typeof ComponentsDisplayTypographyIndexRoute
@@ -548,9 +632,14 @@ const ComponentsDisplayRouteRouteChildren: ComponentsDisplayRouteRouteChildren =
   {
     ComponentsDisplayAvatarIndexRoute: ComponentsDisplayAvatarIndexRoute,
     ComponentsDisplayBadgeIndexRoute: ComponentsDisplayBadgeIndexRoute,
+    ComponentsDisplayCardIndexRoute: ComponentsDisplayCardIndexRoute,
     ComponentsDisplayChipIndexRoute: ComponentsDisplayChipIndexRoute,
     ComponentsDisplayDividerIndexRoute: ComponentsDisplayDividerIndexRoute,
+    ComponentsDisplayDropdownIndexRoute: ComponentsDisplayDropdownIndexRoute,
+    ComponentsDisplayFullscreenToggleIndexRoute:
+      ComponentsDisplayFullscreenToggleIndexRoute,
     ComponentsDisplayIconIndexRoute: ComponentsDisplayIconIndexRoute,
+    ComponentsDisplayListIndexRoute: ComponentsDisplayListIndexRoute,
     ComponentsDisplayLoaderIndexRoute: ComponentsDisplayLoaderIndexRoute,
     ComponentsDisplayTooltipIndexRoute: ComponentsDisplayTooltipIndexRoute,
     ComponentsDisplayTypographyIndexRoute:

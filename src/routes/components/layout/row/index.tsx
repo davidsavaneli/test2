@@ -10,7 +10,7 @@ function RowPage() {
   return (
     <PageLayout>
       <Col gap="lg">
-        <Typography variant="bodySmall" color="tertiary">
+        <Typography variant="bodySmall" color="muted">
           Horizontal, items centered · gap
         </Typography>
         <Row gap="md">
@@ -18,7 +18,7 @@ function RowPage() {
           <Button>B</Button>
           <Button>C</Button>
         </Row>
-        <Typography variant="bodySmall" color="tertiary">
+        <Typography variant="bodySmall" color="muted">
           justify="between"
         </Typography>
         <Row gap="md" justify="between">

@@ -20,7 +20,7 @@ function UseMediaQueryPage() {
         <Typography variant="body">
           <strong>(prefers-color-scheme: dark)</strong> → {prefersDark ? 'matches ✓' : 'no match'}
         </Typography>
-        <Typography variant="bodySmall" color="tertiary">
+        <Typography variant="bodySmall" color="muted">
           Resize the window past 1024px to watch the first row flip live.
         </Typography>
       </Col>
